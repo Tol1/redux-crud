@@ -1,4 +1,4 @@
-import * as omit from "ramda/src/omit"
+import * as omit from "ramda/src/omit";
 
 import constants from "../../../constants";
 import findByKey from "../../../utils/findByKey";
@@ -9,21 +9,24 @@ import {Config, InvariantsBaseArgs, ReducerName} from "../../../types";
 
 var reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_ERROR;
 var invariantArgs: InvariantsBaseArgs = {
-  reducerName,
-  canBeArray: false
+	reducerName,
+	canBeArray: false
 };
 
 export default function error(
-  config: Config,
-  current: Array<any>,
-  record: any
+	config: Config,
+	current: Array<any>,
+	record: any
 ): Array<any> {
-  invariants(invariantArgs, config, current, record);
+	invariants(invariantArgs, config, current, record);
 
-  var key = config.key;
-  var deleteId = record[key];
-  var deleteRecord = findByKey(current, key, deleteId);
-  deleteRecord = omit(["deleted", "busy"], deleteRecord);
+	var key = config.key;
+	var deleteId = record[key];
+	var deleteRecord = findByKey(current, key, deleteId);
+	deleteRecord = omit(
+		[constants.SPECIAL_KEYS.DELETED, constants.SPECIAL_KEYS.BUSY],
+		deleteRecord
+	);
 
-  return store.merge(current, deleteRecord, key);
+	return store.merge(current, deleteRecord, key);
 }
