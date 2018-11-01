@@ -62,7 +62,7 @@ test(subject + "doesnt mutate", function(t) {
 	var updated = reducer(config, curr, record);
 
 	t.is(updated[0][constants.SPECIAL_KEYS.DELETED], true);
-	t.is(curr[0]["deleted"], undefined);
+	t.is(curr[0][constants.SPECIAL_KEYS.DELETED], undefined);
 });
 
 test(subject + "uses the given key", function(t) {
