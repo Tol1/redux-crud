@@ -3,19 +3,19 @@ import constants from "../../../constants";
 import invariants from "../invariants";
 import remove from "../store/remove";
 
-import {Config, InvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_ERROR;
-var invariantArgs: InvariantsBaseArgs = {
+const reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_ERROR;
+const invariantArgs: IInvariantsBaseArgs = {
   reducerName,
   canBeArray: false
 };
 
 export default function error(
-  config: Config,
-  current: Array<any>,
+  config: IConfig,
+  current: any[],
   record: any
-): Array<any> {
+): any[] {
   invariants(invariantArgs, config, current, record);
 
   return remove(config, current, record);

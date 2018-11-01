@@ -3,23 +3,23 @@ import constants from "../../../constants";
 import invariants from "../invariants";
 import store from "../store";
 
-import {Config, InvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_START;
-var invariantArgs: InvariantsBaseArgs = {
+const reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_START;
+const invariantArgs: IInvariantsBaseArgs = {
   reducerName,
   canBeArray: false
 };
 
 export default function start(
-  config: Config,
-  current: Array<any>,
+  config: IConfig,
+  current: any[],
   record: any
-): Array<any> {
+): any[] {
   invariants(invariantArgs, config, current, record);
 
   // mark record as unsaved and busy
-  var newRecord = prepareRecord(record);
+  const newRecord = prepareRecord(record);
 
   return store.merge(current, newRecord, config.key);
 }

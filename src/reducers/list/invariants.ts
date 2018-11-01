@@ -1,15 +1,15 @@
 import invariants from "../invariants";
 import store from "./store";
 
-import {Config, InvariantsBaseArgs, ReducerName} from "../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../types";
 
 export default function invariantsList(
-  invariantArgs: InvariantsBaseArgs,
-  config: Config,
-  current: Array<any>,
+  invariantArgs: IInvariantsBaseArgs,
+  config: IConfig,
+  current: any[],
   record: any
 ) {
-  var extra = {
+  const extra = {
     assertValidStore: store.assert,
     config,
     current,

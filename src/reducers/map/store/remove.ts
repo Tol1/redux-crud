@@ -1,14 +1,14 @@
-import * as omit from "ramda/src/omit"
+import * as omit from "ramda/src/omit";
 
-import {Config, Map} from "../../../types";
+import {IConfig, IMap} from "../../../types";
 
 export default function remove(
-  config: Config,
-  current: Map<any>,
+  config: IConfig,
+  current: IMap<any>,
   record: any
-): Map<any> {
-  var key = config.key;
-  var recordKey = record[key];
+): IMap<any> {
+  const key = config.key;
+  const recordKey = record[key];
 
   return omit([recordKey], current);
 }

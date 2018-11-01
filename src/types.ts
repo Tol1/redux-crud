@@ -1,58 +1,58 @@
-export interface Config {
-	key?: string;
-	resourceName: string;
+export interface IConfig {
+  key?: string;
+  resourceName: string;
 }
 
-export interface InvariantsBaseArgs {
-	reducerName: ReducerName;
-	canBeArray: boolean;
+export interface IInvariantsBaseArgs {
+  reducerName: ReducerName;
+  canBeArray: boolean;
 }
 
-export interface InvariantsExtraArgs {
-	assertValidStore: (scope: string, current: any) => void;
-	config: Config;
-	current: any;
-	record: any;
+export interface IInvariantsExtraArgs {
+  assertValidStore: (scope: string, current: any) => void;
+  config: IConfig;
+  current: any;
+  record: any;
 }
 
-export interface Map<T> {
-	[key: string]: T;
+export interface IMap<T> {
+  [key: string]: T;
 }
 
 export type ReducerName =
-	| "createError"
-	| "createSuccess"
-	| "createStart"
-	| "createRequest"
-	| "deleteError"
-	| "deleteSuccess"
-	| "deleteStart"
-	| "deleteRequest"
-	| "fetchSuccess"
-	| "fetchRequest"
-	| "fetchError"
-	| "updateError"
-	| "updateSuccess"
-	| "updateStart"
-	| "updateRequest";
+  | "createError"
+  | "createSuccess"
+  | "createStart"
+  | "createRequest"
+  | "deleteError"
+  | "deleteSuccess"
+  | "deleteStart"
+  | "deleteRequest"
+  | "fetchSuccess"
+  | "fetchRequest"
+  | "fetchError"
+  | "updateError"
+  | "updateSuccess"
+  | "updateStart"
+  | "updateRequest";
 
-export interface StoreList {
-	remove: (config: Config, current: Array<any>, record: any) => Array<any>;
+export interface IStoreList {
+  remove: (config: IConfig, current: any[], record: any) => any[];
 }
 
-export interface StoreMap {
-	remove: (config: Config, current: Map<any>, record: any) => Map<any>;
+export interface IStoreMap {
+  remove: (config: IConfig, current: IMap<any>, record: any) => IMap<any>;
 }
 
-export interface Record {
-	id: string | number;
-	_cid?: string | number;
-	busy?: boolean;
-	deleted?: boolean;
-	pendingCreate?: boolean;
-	pendingUpdate?: boolean;
+export interface IRecord {
+  id: string | number;
+  _cid?: string | number;
+  _busy?: boolean;
+  _deleted?: boolean;
+  _pendingCreate?: boolean;
+  _pendingUpdate?: boolean;
 }
 
-export interface LooseObject {
-	[key: string]: string;
+export interface ILooseObject {
+  [key: string]: string;
 }

@@ -6,11 +6,11 @@ import assertNotArray from "./utils/assertNotArray";
 import constants from "./constants";
 import getDefaultConfig from "./getDefaultConfig";
 
-import {Config, ReducerName} from "./types";
+import {IConfig, ReducerName} from "./types";
 
 // const invariant = require("invariant")
 
-function actionCreatorsFor<T>(resourceName: string, config?: Config) {
+function actionCreatorsFor<T>(resourceName: string, config?: IConfig) {
   if (resourceName == null)
     throw new Error("actionCreatorsFor: Expected resourceName");
 
@@ -40,135 +40,135 @@ function actionCreatorsFor<T>(resourceName: string, config?: Config) {
   return {
     fetchStart(data?) {
       return {
-        data: data,
+        data,
         type: actionTypes.fetchStart
       };
     },
 
     fetchSuccess(records?: T[], data?) {
-      var name: ReducerName = "fetchSuccess";
+      const name: ReducerName = "fetchSuccess";
       assertManyRecords(name, records);
 
       return {
-        data: data,
-        records: records,
+        data,
+        records,
         type: actionTypes.fetchSuccess
       };
     },
 
     fetchError(error?, data?) {
-      var name: ReducerName = "fetchError";
+      const name: ReducerName = "fetchError";
       assertError(name, error);
 
       return {
-        data: data,
-        error: error,
+        data,
+        error,
         type: actionTypes.fetchError
       };
     },
 
     createStart(record?: T, data?) {
-      var name: ReducerName = "createStart";
+      const name: ReducerName = "createStart";
       assertOneRecord(name, record);
 
       return {
-        data: data,
-        record: record,
+        data,
+        record,
         type: actionTypes.createStart
       };
     },
 
     createSuccess(record?: T, clientGeneratedKey?, data?) {
-      var name: ReducerName = "createSuccess";
+      const name: ReducerName = "createSuccess";
       assertOneRecord(name, record);
 
       return {
         cid: clientGeneratedKey,
-        data: data,
-        record: record,
+        data,
+        record,
         type: actionTypes.createSuccess
       };
     },
 
     createError(error?, record?: T, data?) {
-      var name: ReducerName = "createError";
+      const name: ReducerName = "createError";
       assertError(name, error);
       assertOneRecord(name, record);
 
       return {
-        data: data,
-        error: error,
-        record: record,
+        data,
+        error,
+        record,
         type: actionTypes.createError
       };
     },
 
     updateStart(record?: T, data?) {
-      var name: ReducerName = "updateStart";
+      const name: ReducerName = "updateStart";
       assertOneRecord(name, record);
 
       return {
-        data: data,
-        record: record,
+        data,
+        record,
         type: actionTypes.updateStart
       };
     },
 
     updateSuccess(record?: T, data?) {
-      var name: ReducerName = "updateSuccess";
+      const name: ReducerName = "updateSuccess";
       assertOneRecord(name, record);
 
       return {
-        data: data,
-        record: record,
+        data,
+        record,
         type: actionTypes.updateSuccess
       };
     },
 
     updateError(error?, record?: T, data?) {
-      var name: ReducerName = "updateError";
+      const name: ReducerName = "updateError";
       assertError(name, error);
       assertOneRecord(name, record);
 
       return {
-        data: data,
-        error: error,
-        record: record,
+        data,
+        error,
+        record,
         type: actionTypes.updateError
       };
     },
 
     deleteStart(record?: T, data?) {
-      var name: ReducerName = "deleteStart";
+      const name: ReducerName = "deleteStart";
       assertOneRecord(name, record);
 
       return {
-        data: data,
-        record: record,
+        data,
+        record,
         type: actionTypes.deleteStart
       };
     },
 
     deleteSuccess(record?: T, data?) {
-      var name: ReducerName = "deleteSuccess";
+      const name: ReducerName = "deleteSuccess";
       assertOneRecord(name, record);
 
       return {
-        data: data,
-        record: record,
+        data,
+        record,
         type: actionTypes.deleteSuccess
       };
     },
 
     deleteError(error?, record?: T, data?) {
-      var name: ReducerName = "deleteError";
+      const name: ReducerName = "deleteError";
       assertError(name, error);
       assertOneRecord(name, record);
 
       return {
-        data: data,
-        error: error,
-        record: record,
+        data,
+        error,
+        record,
         type: actionTypes.deleteError
       };
     }

@@ -17,7 +17,7 @@ test(subject + "calls fetchSuccess", function(t) {
   const fetchSuccess = td.function();
   const reducers = reducersFor("users", {}, {fetchSuccess});
 
-  var users = [user];
+  const users = [user];
 
   reducers(current, {
     records: users,
@@ -32,7 +32,7 @@ test(subject + "calls fetchSuccess with replace", function(t) {
   const fetchSuccess = td.function();
   const reducers = reducersFor("users", {}, {fetchSuccess});
 
-  var users = [user];
+  const users = [user];
 
   reducers(current, {
     data: {replace: true},
@@ -61,12 +61,12 @@ test(subject + "calls createSuccess", function(t) {
   const createSuccess = td.function();
   const reducers = reducersFor("users", {}, {createSuccess});
 
-  var cid = "abc";
+  const cid = "abc";
 
   reducers(current, {
     record: user,
     type: "USERS_CREATE_SUCCESS",
-    cid: cid
+    cid
   });
 
   td.verify(createSuccess(config, current, user, cid));
@@ -78,7 +78,7 @@ test(subject + "calls createError", function(t) {
   const reducers = reducersFor("users", {}, {createError});
 
   reducers(current, {
-    error: error,
+    error,
     record: user,
     type: "USERS_CREATE_ERROR"
   });
@@ -118,7 +118,7 @@ test(subject + "calls updateError", function(t) {
   const reducers = reducersFor("users", {}, {updateError});
 
   reducers(current, {
-    error: error,
+    error,
     record: user,
     type: "USERS_UPDATE_ERROR"
   });
@@ -158,7 +158,7 @@ test(subject + "calls deleteError", function(t) {
   const reducers = reducersFor("users", {}, {deleteError});
 
   reducers(current, {
-    error: error,
+    error,
     record: user,
     type: "USERS_DELETE_ERROR"
   });
@@ -176,7 +176,7 @@ test(subject + "it passes the given key", function(t) {
     type: "USERS_CREATE_START"
   });
 
-  var expectedConfig = {
+  const expectedConfig = {
     key: "_id",
     resourceName: "users"
   };
@@ -186,9 +186,9 @@ test(subject + "it passes the given key", function(t) {
 });
 
 test(subject + "it doesnt mutate the config", function(t) {
-  const config = {};
-  reducersFor("users", config);
-  reducersFor("monkeys", config);
+  const emptyConfig = {};
+  reducersFor("users", emptyConfig);
+  reducersFor("monkeys", emptyConfig);
 
-  t.deepEqual(config, {});
+  t.deepEqual(emptyConfig, {});
 });

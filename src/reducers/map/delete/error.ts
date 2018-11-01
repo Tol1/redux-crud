@@ -6,36 +6,36 @@ import findByKey from "../../../utils/findByKey";
 import invariants from "../invariants";
 import store from "../store";
 
-import {Config, InvariantsBaseArgs, Map, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, IMap, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_ERROR;
-var invariantArgs: InvariantsBaseArgs = {
-	reducerName,
-	canBeArray: false
+const reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_ERROR;
+const invariantArgs: IInvariantsBaseArgs = {
+  reducerName,
+  canBeArray: false
 };
 
 export default function error(
-	config: Config,
-	current: Map<any>,
-	record: any
-): Map<any> {
-	invariants(invariantArgs, config, current, record);
+  config: IConfig,
+  current: IMap<any>,
+  record: any
+): IMap<any> {
+  invariants(invariantArgs, config, current, record);
 
-	var key = config.key;
-	var deleteId = record[key];
+  const key = config.key;
+  const deleteId = record[key];
 
-	// Find the record
-	var deleteRecord = current[deleteId];
+  // Find the record
+  let deleteRecord = current[deleteId];
 
-	if (deleteRecord == null) {
-		return current;
-	} else {
-		// Remove deleted and busy
-		deleteRecord = omit(
-			[constants.SPECIAL_KEYS.DELETED, constants.SPECIAL_KEYS.BUSY],
-			deleteRecord
-		);
+  if (deleteRecord == null) {
+    return current;
+  } else {
+    // Remove deleted and busy
+    deleteRecord = omit(
+      [constants.SPECIAL_KEYS.DELETED, constants.SPECIAL_KEYS.BUSY],
+      deleteRecord
+    );
 
-		return merge(current, {[deleteId]: deleteRecord});
-	}
+    return merge(current, {[deleteId]: deleteRecord});
+  }
 }

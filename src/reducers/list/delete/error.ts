@@ -5,28 +5,28 @@ import findByKey from "../../../utils/findByKey";
 import invariants from "../invariants";
 import store from "../store";
 
-import {Config, InvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_ERROR;
-var invariantArgs: InvariantsBaseArgs = {
-	reducerName,
-	canBeArray: false
+const reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_ERROR;
+const invariantArgs: IInvariantsBaseArgs = {
+  reducerName,
+  canBeArray: false
 };
 
 export default function error(
-	config: Config,
-	current: Array<any>,
-	record: any
-): Array<any> {
-	invariants(invariantArgs, config, current, record);
+  config: IConfig,
+  current: any[],
+  record: any
+): any[] {
+  invariants(invariantArgs, config, current, record);
 
-	var key = config.key;
-	var deleteId = record[key];
-	var deleteRecord = findByKey(current, key, deleteId);
-	deleteRecord = omit(
-		[constants.SPECIAL_KEYS.DELETED, constants.SPECIAL_KEYS.BUSY],
-		deleteRecord
-	);
+  const key = config.key;
+  const deleteId = record[key];
+  let deleteRecord = findByKey(current, key, deleteId);
+  deleteRecord = omit(
+    [constants.SPECIAL_KEYS.DELETED, constants.SPECIAL_KEYS.BUSY],
+    deleteRecord
+  );
 
-	return store.merge(current, deleteRecord, key);
+  return store.merge(current, deleteRecord, key);
 }

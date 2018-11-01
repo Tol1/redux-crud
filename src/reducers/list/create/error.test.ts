@@ -3,8 +3,8 @@ import test from "ava";
 import constants from "../../../constants";
 import reducer from "./error";
 
-var subject = constants.REDUCER_NAMES.CREATE_ERROR;
-var config = {
+const subject = constants.REDUCER_NAMES.CREATE_ERROR;
+const config = {
   key: constants.DEFAULT_KEY,
   resourceName: "users"
 };
@@ -23,8 +23,8 @@ function getCurrent() {
 }
 
 test(subject + "throws if given an array", function(t) {
-  var curr = getCurrent();
-  var created = [];
+  const curr = getCurrent();
+  const created = [];
 
   function fn() {
     reducer(config, curr, created);
@@ -34,12 +34,12 @@ test(subject + "throws if given an array", function(t) {
 });
 
 test(subject + "removes the record", function(t) {
-  var curr = getCurrent();
-  var created = {
+  const curr = getCurrent();
+  const created = {
     id: "abc",
     name: "Green"
   };
-  var updated = reducer(config, curr, created);
+  const updated = reducer(config, curr, created);
 
   t.deepEqual(updated.length, 1);
 });

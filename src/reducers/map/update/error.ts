@@ -3,25 +3,25 @@ import constants from "../../../constants";
 import invariants from "../invariants";
 import store from "../store";
 
-import {Config, InvariantsBaseArgs, Map, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, IMap, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.UPDATE_ERROR;
-var invariantArgs: InvariantsBaseArgs = {
+const reducerName: ReducerName = constants.REDUCER_NAMES.UPDATE_ERROR;
+const invariantArgs: IInvariantsBaseArgs = {
   reducerName,
   canBeArray: false
 };
 
 export default function error(
-  config: Config,
-  current: Map<any>,
+  config: IConfig,
+  current: IMap<any>,
   record: any
-): Map<any> {
+): IMap<any> {
   invariants(invariantArgs, config, current, record);
 
   // We don"t want to rollback
-  var key = config.key;
-  var updatedId = record[key];
-  var updatedRecord = current[updatedId];
+  const key = config.key;
+  const updatedId = record[key];
+  let updatedRecord = current[updatedId];
 
   if (updatedRecord == null) return current;
 

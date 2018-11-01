@@ -4,16 +4,16 @@ import store from "../store";
 import wrapArray from "../../../utils/wrapArray";
 import invariants from "../invariants";
 
-import {Config, InvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.FETCH_SUCCESS;
-const invariantArgs: InvariantsBaseArgs = {
+const invariantArgs: IInvariantsBaseArgs = {
   reducerName,
   canBeArray: true
 };
 
 export default function success(
-  config: Config,
+  config: IConfig,
   current: any[],
   records: any,
   emptyState: any,

@@ -1,7 +1,7 @@
-import {Config, ReducerName} from "../types";
+import {IConfig, ReducerName} from "../types";
 
 export default function makeScope(
-  config: Config,
+  config: IConfig,
   reducerName: ReducerName
 ): string {
   return config.resourceName + "." + reducerName;

@@ -5,17 +5,17 @@ import makeScope from "../utils/makeScope";
 import wrapArray from "../utils/wrapArray";
 
 import {
-  Config,
-  InvariantsBaseArgs,
-  InvariantsExtraArgs,
+  IConfig,
+  IInvariantsBaseArgs,
+  IInvariantsExtraArgs,
   ReducerName
 } from "../types";
 
 export default function invariants(
-  baseArgs: InvariantsBaseArgs,
-  extraArgs: InvariantsExtraArgs
+  baseArgs: IInvariantsBaseArgs,
+  extraArgs: IInvariantsExtraArgs
 ) {
-  var config = extraArgs.config;
+  const config = extraArgs.config;
 
   if (!config.resourceName) throw new Error("Expected config.resourceName");
 

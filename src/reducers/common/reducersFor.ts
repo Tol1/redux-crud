@@ -1,20 +1,20 @@
-import * as merge from "ramda/src/merge"
+import * as merge from "ramda/src/merge";
 
 import actionTypesFor from "../../actionTypesFor";
 import constants from "../../constants";
 
-import {Config, ReducerName} from "../../types";
+import {IConfig, ReducerName} from "../../types";
 
 function reducersFor(resourceName: string, args = {}, emptyState, reducers) {
   if (resourceName == null)
     throw new Error("reducersFor: Expected resourceName");
 
-  var defaults = {
+  const defaults = {
     key: constants.DEFAULT_KEY,
-    resourceName: resourceName
+    resourceName
   };
 
-  var config = merge(defaults, args);
+  const config = merge(defaults, args);
 
   return function getReducer(state, action) {
     state = state || emptyState;
@@ -22,8 +22,8 @@ function reducersFor(resourceName: string, args = {}, emptyState, reducers) {
     if (action == null)
       throw new Error(resourceName + " reducers: Expected action");
 
-    var actionTypes = actionTypesFor(resourceName);
-    var record = action.record;
+    const actionTypes = actionTypesFor(resourceName);
+    const record = action.record;
 
     switch (action.type) {
       case actionTypes.fetchSuccess:

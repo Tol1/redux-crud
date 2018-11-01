@@ -1,4 +1,4 @@
-import {Config} from "./types";
+import {IConfig} from "./types";
 import actionCreatorsFor from "./actionCreatorsFor";
 import actionTypesFor from "./actionTypesFor";
 import constants from "./constants";

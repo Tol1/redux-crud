@@ -1,31 +1,31 @@
 import constants from "../../../constants";
 import invariants from "../invariants";
 
-import {Config, InvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_SUCCESS;
-var invariantArgs: InvariantsBaseArgs = {
+const reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_SUCCESS;
+const invariantArgs: IInvariantsBaseArgs = {
   reducerName,
   canBeArray: false
 };
 
 export default function success(
-  config: Config,
-  current: Array<any>,
+  config: IConfig,
+  current: any[],
   addedRecord: any,
   clientGeneratedKey?: string
-): Array<any> {
+): any[] {
   invariants(invariantArgs, config, current, addedRecord);
 
-  var key = config.key;
-  var done = false;
+  const key = config.key;
+  let done = false;
 
   // Update existing records
-  var updatedCollection = current.map(function(record) {
-    var recordKey = record[key];
+  let updatedCollection = current.map(function(record) {
+    const recordKey = record[key];
     if (recordKey == null) throw new Error("Expected record to have " + key);
-    var isSameKey = recordKey === addedRecord[key];
-    var isSameClientGetKey =
+    const isSameKey = recordKey === addedRecord[key];
+    const isSameClientGetKey =
       clientGeneratedKey != null && clientGeneratedKey === recordKey;
     if (isSameKey || isSameClientGetKey) {
       done = true;

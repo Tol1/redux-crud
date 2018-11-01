@@ -1,14 +1,14 @@
-import * as values from "ramda/src/values"
+import * as values from "ramda/src/values";
 import test from "ava";
 
 import constants from "../../../constants";
 import reducer from "./success";
 
-var config = {
+const config = {
   key: constants.DEFAULT_KEY,
   resourceName: "users"
 };
-var subject = constants.REDUCER_NAMES.DELETE_SUCCESS;
+const subject = constants.REDUCER_NAMES.DELETE_SUCCESS;
 
 function getCurrent() {
   return {
@@ -31,8 +31,8 @@ function getValid() {
 }
 
 test(subject + "throws if given an array", function(t) {
-  var curr = getCurrent();
-  var record = [];
+  const curr = getCurrent();
+  const record = [];
   function fn() {
     reducer(config, curr, record);
   }
@@ -41,48 +41,48 @@ test(subject + "throws if given an array", function(t) {
 });
 
 test(subject + "removes the record", function(t) {
-  var curr = getCurrent();
-  var record = getValid();
-  var updated = reducer(config, curr, record);
+  const curr = getCurrent();
+  const record = getValid();
+  const updated = reducer(config, curr, record);
 
   t.is(values(updated).length, 1, "removes the record");
   t.is(updated["1"], undefined);
 });
 
 test(subject + "doesnt mutate the original collection", function(t) {
-  var curr = getCurrent();
-  var record = getValid();
-  var updated = reducer(config, curr, record);
+  const curr = getCurrent();
+  const record = getValid();
+  const updated = reducer(config, curr, record);
 
   t.is(values(curr).length, 2);
   t.is(values(updated).length, 1);
 });
 
 test(subject + "uses the given key", function(t) {
-  var config = {
+  const configWithKey = {
     key: "_id",
     resourceName: "users"
   };
-  var curr = [
+  const curr = [
     {
       _id: 1
     }
   ];
-  var record = {
+  const record = {
     _id: 1
   };
-  var updated = reducer(config, curr, record);
+  const updated = reducer(configWithKey, curr, record);
 
   t.deepEqual(values(updated).length, 0, "removes the record");
 });
 
 test(subject + "it throws when record dont have an id", function(t) {
-  var curr = getCurrent();
-  var record = {
+  const curr = getCurrent();
+  const record = {
     name: "Green"
   };
 
-  var f = function() {
+  const f = function() {
     reducer(config, curr, record);
   };
   t.throws(f);

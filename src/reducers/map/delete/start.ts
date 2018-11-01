@@ -3,24 +3,24 @@ import invariants from "../invariants";
 import constants from "../../../constants";
 import store from "../store";
 
-import {Config, InvariantsBaseArgs, Map, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, IMap, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_START;
-var invariantArgs: InvariantsBaseArgs = {
+const reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_START;
+const invariantArgs: IInvariantsBaseArgs = {
   reducerName,
   canBeArray: false
 };
 
 export default function start(
-  config: Config,
-  current: Map<any>,
+  config: IConfig,
+  current: IMap<any>,
   record: any
-): Map<any> {
+): IMap<any> {
   invariants(invariantArgs, config, current, record);
 
-  var key = config.key;
-  var deleteId = record[key];
-  var deleteRecord = current[deleteId];
+  const key = config.key;
+  const deleteId = record[key];
+  let deleteRecord = current[deleteId];
 
   if (deleteRecord == null) {
     return current;

@@ -35,19 +35,19 @@ test(subject + "returns the actionCreators", function(t) {
 });
 
 test(subject + "fetchStart", function(t) {
-  var data = {foo: 1};
+  const data = {foo: 1};
 
-  var action = actionCreators.fetchStart(data);
+  const action = actionCreators.fetchStart(data);
 
   t.deepEqual(action.type, "USERS_FETCH_START");
   t.deepEqual(action.data, data, "has the data");
 });
 
 test(subject + "fetchSuccess", function(t) {
-  var data = {foo: 1};
-  var users = makeUsers();
+  const data = {foo: 1};
+  const users = makeUsers();
 
-  var action = actionCreators.fetchSuccess(users, data);
+  const action = actionCreators.fetchSuccess(users, data);
 
   t.deepEqual(action.type, "USERS_FETCH_SUCCESS");
   t.deepEqual(action.records, users, "has the user");
@@ -60,9 +60,9 @@ test(subject + "fetchSuccess", function(t) {
 });
 
 test(subject + "fetchError", function(t) {
-  var data = {foo: 1};
+  const data = {foo: 1};
 
-  var action = actionCreators.fetchError(error, data);
+  const action = actionCreators.fetchError(error, data);
 
   t.deepEqual(action.type, "USERS_FETCH_ERROR");
   t.deepEqual(action.error, error, "has the error");
@@ -70,10 +70,10 @@ test(subject + "fetchError", function(t) {
 });
 
 test(subject + "createStart", function(t) {
-  var user = makeUser();
-  var data = {foo: 1};
+  const user = makeUser();
+  const data = {foo: 1};
 
-  var action = actionCreators.createStart(user, data);
+  const action = actionCreators.createStart(user, data);
 
   t.deepEqual(action.type, "USERS_CREATE_START");
   t.deepEqual(action.record, user, "has the user");
@@ -92,17 +92,17 @@ test(subject + "createStart", function(t) {
 
   // it expects a key on the record
   function withoutKey() {
-    var user = {};
-    actionCreators.createStart(user);
+    const userWithoutKey = {};
+    actionCreators.createStart(userWithoutKey);
   }
   t.throws(withoutKey, /Expected record\.id in createStart/);
 });
 
 test(subject + "createSuccess", function(t) {
-  var user = makeUser();
-  var data = {foo: 1};
+  const user = makeUser();
+  const data = {foo: 1};
 
-  var action = actionCreators.createSuccess(user, "abc", data);
+  const action = actionCreators.createSuccess(user, "abc", data);
 
   t.deepEqual(action.type, "USERS_CREATE_SUCCESS");
   t.deepEqual(action.record, user, "has the user");
@@ -122,10 +122,10 @@ test(subject + "createSuccess", function(t) {
 });
 
 test(subject + "createError", function(t) {
-  var user = makeUser();
-  var data = {foo: 1};
+  const user = makeUser();
+  const data = {foo: 1};
 
-  var action = actionCreators.createError(error, user, data);
+  const action = actionCreators.createError(error, user, data);
 
   t.deepEqual(action.type, "USERS_CREATE_ERROR");
   t.deepEqual(action.error, error);
@@ -144,17 +144,17 @@ test(subject + "createError", function(t) {
   t.throws(withArray, arrayRegEx);
 
   function withoutKey() {
-    var user = {};
-    actionCreators.createError(error, user);
+    const userWithoutKey = {};
+    actionCreators.createError(error, userWithoutKey);
   }
   t.throws(withoutKey, /Expected record\.id in createError/);
 });
 
 test(subject + "updateStart", function(t) {
-  var user = makeUser();
-  var data = {foo: 1};
+  const user = makeUser();
+  const data = {foo: 1};
 
-  var action = actionCreators.updateStart(user, data);
+  const action = actionCreators.updateStart(user, data);
 
   t.deepEqual(action.type, "USERS_UPDATE_START");
   t.deepEqual(action.record, user, "has the user");
@@ -173,10 +173,10 @@ test(subject + "updateStart", function(t) {
 });
 
 test(subject + "updateSuccess", function(t) {
-  var user = makeUser();
-  var data = {foo: 1};
+  const user = makeUser();
+  const data = {foo: 1};
 
-  var action = actionCreators.updateSuccess(user, data);
+  const action = actionCreators.updateSuccess(user, data);
 
   t.deepEqual(action.type, "USERS_UPDATE_SUCCESS");
   t.deepEqual(action.record, user, "has the user");
@@ -195,10 +195,10 @@ test(subject + "updateSuccess", function(t) {
 });
 
 test(subject + "updateError", function(t) {
-  var user = makeUser();
-  var data = {foo: 1};
+  const user = makeUser();
+  const data = {foo: 1};
 
-  var action = actionCreators.updateError(error, user, data);
+  const action = actionCreators.updateError(error, user, data);
 
   t.deepEqual(action.type, "USERS_UPDATE_ERROR");
   t.deepEqual(action.error, error);
@@ -218,10 +218,10 @@ test(subject + "updateError", function(t) {
 });
 
 test(subject + "deleteStart", function(t) {
-  var user = makeUser();
-  var data = {foo: 1};
+  const user = makeUser();
+  const data = {foo: 1};
 
-  var action = actionCreators.deleteStart(user, data);
+  const action = actionCreators.deleteStart(user, data);
 
   t.deepEqual(action.type, "USERS_DELETE_START");
   t.deepEqual(action.record, user, "has the user");
@@ -240,10 +240,10 @@ test(subject + "deleteStart", function(t) {
 });
 
 test(subject + "deleteSuccess", function(t) {
-  var user = makeUser();
-  var data = {foo: 1};
+  const user = makeUser();
+  const data = {foo: 1};
 
-  var action = actionCreators.deleteSuccess(user, data);
+  const action = actionCreators.deleteSuccess(user, data);
 
   t.deepEqual(action.type, "USERS_DELETE_SUCCESS");
   t.deepEqual(action.record, user, "has the user");
@@ -262,10 +262,10 @@ test(subject + "deleteSuccess", function(t) {
 });
 
 test(subject + "deleteError", function(t) {
-  var user = makeUser();
-  var data = {foo: 1};
+  const user = makeUser();
+  const data = {foo: 1};
 
-  var action = actionCreators.deleteError(error, user, data);
+  const action = actionCreators.deleteError(error, user, data);
 
   t.deepEqual(action.type, "USERS_DELETE_ERROR");
   t.deepEqual(action.error, error);

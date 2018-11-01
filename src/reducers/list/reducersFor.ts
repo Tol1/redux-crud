@@ -1,4 +1,4 @@
-import * as merge from "ramda/src/merge"
+import * as merge from "ramda/src/merge";
 
 import actionTypesFor from "../../actionTypesFor";
 import constants from "../../constants";
@@ -13,7 +13,7 @@ import fetchSuccess from "./fetch/success";
 import updateError from "./update/error";
 import updateStart from "./update/start";
 import updateSuccess from "./update/success";
-import {Config, ReducerName} from "../../types";
+import {IConfig, ReducerName} from "../../types";
 
 const baseReducers = {
   createError,

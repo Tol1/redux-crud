@@ -1,6 +1,6 @@
-import {Config} from "./types";
+import {IConfig} from "./types";
 
-export default function getDefaultConfig(resourceName: string): Config {
+export default function getDefaultConfig(resourceName: string): IConfig {
   return {
     key: "id",
     resourceName

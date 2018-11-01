@@ -4,25 +4,25 @@ import findByKey from "../../../utils/findByKey";
 import invariants from "../invariants";
 import store from "../store";
 
-import {Config, InvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_START;
-var invariantArgs: InvariantsBaseArgs = {
+const reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_START;
+const invariantArgs: IInvariantsBaseArgs = {
   reducerName,
   canBeArray: false
 };
 
 export default function start(
-  config: Config,
-  current: Array<any>,
+  config: IConfig,
+  current: any[],
   record: any
-): Array<any> {
+): any[] {
   invariants(invariantArgs, config, current, record);
 
-  var key = config.key;
-  var deleteId = record[key];
+  const key = config.key;
+  const deleteId = record[key];
 
-  var deleteRecord = findByKey(current, key, deleteId);
+  let deleteRecord = findByKey(current, key, deleteId);
   deleteRecord = prepareRecord(deleteRecord);
 
   return store.merge(current, deleteRecord, key);

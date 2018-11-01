@@ -1,17 +1,17 @@
-import * as forEach from "ramda/src/forEach"
+import * as forEach from "ramda/src/forEach";
 
 import constants from "../../constants";
 import wrapArray from "../../utils/wrapArray";
 
-import {Config, ReducerName} from "../../types";
+import {IConfig, ReducerName} from "../../types";
 
 export default function assertHasKey(
-  config: Config,
+  config: IConfig,
   scope: string,
   recordOrRecords: any
 ): void {
-  var key = config.key;
-  var records = wrapArray(recordOrRecords);
+  const key = config.key;
+  const records = wrapArray(recordOrRecords);
 
   forEach(function(record) {
     if (record[key] == null) {

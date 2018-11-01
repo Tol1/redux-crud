@@ -2,19 +2,19 @@ import constants from "../../../constants";
 import invariants from "../invariants";
 import store from "../store";
 
-import {Config, InvariantsBaseArgs, Map, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, IMap, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_ERROR;
-var invariantArgs: InvariantsBaseArgs = {
+const reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_ERROR;
+const invariantArgs: IInvariantsBaseArgs = {
   reducerName,
   canBeArray: false
 };
 
 export default function error(
-  config: Config,
-  current: Map<any>,
+  config: IConfig,
+  current: IMap<any>,
   record: any
-): Map<any> {
+): IMap<any> {
   invariants(invariantArgs, config, current, record);
 
   return store.remove(config, current, record);

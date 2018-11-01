@@ -4,75 +4,75 @@ import test from "ava";
 import constants from "../../../constants";
 import reducer from "./start";
 
-var config = {
-	key: constants.DEFAULT_KEY,
-	resourceName: "users"
+const config = {
+  key: constants.DEFAULT_KEY,
+  resourceName: "users"
 };
-var subject = constants.REDUCER_NAMES.CREATE_START;
+const subject = constants.REDUCER_NAMES.CREATE_START;
 
 function getCurrent() {
-	return {
-		1: {
-			id: 1,
-			name: "Blue"
-		},
-		2: {
-			id: "abc",
-			name: "Green"
-		}
-	};
+  return {
+    1: {
+      id: 1,
+      name: "Blue"
+    },
+    2: {
+      id: "abc",
+      name: "Green"
+    }
+  };
 }
 
 function getValid() {
-	return {
-		id: 3,
-		name: "Green"
-	};
+  return {
+    id: 3,
+    name: "Green"
+  };
 }
 
 test(subject + " throws if given an array", function(t) {
-	var curr = getCurrent();
-	var created = [];
-	function fn() {
-		reducer(config, curr, created);
-	}
+  const curr = getCurrent();
+  const created = [];
+  function fn() {
+    reducer(config, curr, created);
+  }
 
-	t.throws(fn, TypeError);
+  t.throws(fn, TypeError);
 });
 
 test(subject + " adds the new record", function(t) {
-	var curr = getCurrent();
+  const curr = getCurrent();
 
-	var other = {
-		id: 3,
-		name: "Green"
-	};
-	var updated = reducer(config, curr, other);
+  const other = {
+    id: 3,
+    name: "Green"
+  };
+  const updated = reducer(config, curr, other);
 
-	t.is(values(updated).length, 3, "adds the record");
+  t.is(values(updated).length, 3, "adds the record");
 });
 
 test(subject + "it throws when record doesnt have an id", function(t) {
-	var curr = getCurrent();
-	var record = {
-		name: "Green"
-	};
+  const curr = getCurrent();
+  const record = {
+    name: "Green"
+  };
 
-	var f = function() {
-		reducer(config, curr, record);
-	};
-	t.throws(f, /users.createStart: Expected record to have .id/);
+  const f = function() {
+    reducer(config, curr, record);
+  };
+  t.throws(f, /users.createStart: Expected record to have .id/);
 });
 
 test(subject + "adds busy and pendingCreate", function(t) {
-	var curr = getCurrent();
-	var record = getValid();
-	var updated = reducer(config, curr, record);
+  const curr = getCurrent();
+  const record = getValid();
+  const updated = reducer(config, curr, record);
 
-	t.is(updated["3"].name, "Green");
-	t.truthy(updated["3"][constants.SPECIAL_KEYS.BUSY], "adds busy");
-	t.truthy(
-		updated["3"][constants.SPECIAL_KEYS.PENDING_CREATE],
-		"adds pendingCreate"
-	);
+  t.is(updated["3"].name, "Green");
+  t.truthy(updated["3"][constants.SPECIAL_KEYS.BUSY], "adds busy");
+  t.truthy(
+    updated["3"][constants.SPECIAL_KEYS.PENDING_CREATE],
+    "adds pendingCreate"
+  );
 });

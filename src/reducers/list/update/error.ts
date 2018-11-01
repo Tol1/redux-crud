@@ -4,25 +4,25 @@ import findByKey from "../../../utils/findByKey";
 import invariants from "../invariants";
 import store from "../store";
 
-import {Config, InvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.UPDATE_ERROR;
-var invariantArgs: InvariantsBaseArgs = {
+const reducerName: ReducerName = constants.REDUCER_NAMES.UPDATE_ERROR;
+const invariantArgs: IInvariantsBaseArgs = {
   reducerName,
   canBeArray: false
 };
 
 export default function error(
-  config: Config,
-  current: Array<any>,
+  config: IConfig,
+  current: any[],
   record: any
-): Array<any> {
+): any[] {
   invariants(invariantArgs, config, current, record);
 
   // We don"t want to rollback
-  var key = config.key;
-  var updatedId = record[key];
-  var updatedRecord = findByKey(current, key, updatedId);
+  const key = config.key;
+  const updatedId = record[key];
+  let updatedRecord = findByKey(current, key, updatedId);
 
   if (updatedRecord == null) return current;
 

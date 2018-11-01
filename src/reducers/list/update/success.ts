@@ -2,20 +2,20 @@ import constants from "../../../constants";
 import invariants from "../invariants";
 import store from "../store";
 
-import {Config, InvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
 
-var reducerName: ReducerName = constants.REDUCER_NAMES.UPDATE_SUCCESS;
-var invariantArgs: InvariantsBaseArgs = {
-	reducerName,
-	canBeArray: false
+const reducerName: ReducerName = constants.REDUCER_NAMES.UPDATE_SUCCESS;
+const invariantArgs: IInvariantsBaseArgs = {
+  canBeArray: false,
+  reducerName
 };
 
 export default function success(
-	config: Config,
-	current: Array<any>,
-	record: any
-): Array<any> {
-	invariants(invariantArgs, config, current, record);
+  config: IConfig,
+  current: any[],
+  record: any
+): any[] {
+  invariants(invariantArgs, config, current, record);
 
-	return store.merge(current, record, config.key, true);
+  return store.merge(current, record, config.key, true);
 }
