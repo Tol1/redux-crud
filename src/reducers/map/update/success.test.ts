@@ -44,7 +44,7 @@ test(subject + "throws if given an array", function(t) {
 	t.throws(fn, TypeError);
 });
 
-test(subject + "adds the record if not there", function(t) {
+test(subject + "don't add the record if not there", function(t) {
 	var curr = getCurrent();
 	var record = {
 		id: 3,
@@ -52,19 +52,7 @@ test(subject + "adds the record if not there", function(t) {
 	};
 	var updated = reducer(config, curr, record);
 
-	t.is(values(updated).length, 3);
-});
-
-test(subject + "doesnt mutate the original collection", function(t) {
-	var curr = getCurrent();
-	var record = {
-		id: 3,
-		name: "Green"
-	};
-	var updated = reducer(config, curr, record);
-
-	t.is(values(curr).length, 2);
-	t.is(values(updated).length, 3);
+	t.is(values(updated).length, 2);
 });
 
 test(subject + "updates existing", function(t) {
@@ -74,6 +62,18 @@ test(subject + "updates existing", function(t) {
 
 	t.is(values(updated).length, 2);
 	t.is(updated["2"].id, 2);
+	t.is(updated["2"].name, "Green");
+});
+
+test(subject + "doesnt mutate the original collection", function(t) {
+	var curr = getCurrent();
+	var record = {
+		id: 2,
+		name: "Green"
+	};
+	var updated = reducer(config, curr, record);
+
+	t.is(curr["2"].name, "Red");
 	t.is(updated["2"].name, "Green");
 });
 
