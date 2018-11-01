@@ -52,3 +52,7 @@ export interface Record {
 	pendingCreate?: boolean;
 	pendingUpdate?: boolean;
 }
+
+export interface LooseObject {
+	[key: string]: string;
+}
