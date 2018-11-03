@@ -17,21 +17,34 @@ function makeUsers() {
 }
 
 test(subject + "returns the actionCreators", function(t) {
+  t.truthy(actionCreators.fetchRequest);
   t.truthy(actionCreators.fetchStart);
   t.truthy(actionCreators.fetchSuccess);
   t.truthy(actionCreators.fetchError);
 
+  t.truthy(actionCreators.createRequest);
   t.truthy(actionCreators.createStart);
   t.truthy(actionCreators.createSuccess);
   t.truthy(actionCreators.createError);
 
+  t.truthy(actionCreators.updateRequest);
   t.truthy(actionCreators.updateStart);
   t.truthy(actionCreators.updateSuccess);
   t.truthy(actionCreators.updateError);
 
+  t.truthy(actionCreators.deleteRequest);
   t.truthy(actionCreators.deleteStart);
   t.truthy(actionCreators.deleteSuccess);
   t.truthy(actionCreators.deleteError);
+});
+
+test(subject + "fetchRequest", function(t) {
+  const data = {foo: 1};
+
+  const action = actionCreators.fetchRequest(data);
+
+  t.deepEqual(action.type, "USERS_FETCH_REQUEST");
+  t.deepEqual(action.data, data, "has the data");
 });
 
 test(subject + "fetchStart", function(t) {
@@ -67,6 +80,35 @@ test(subject + "fetchError", function(t) {
   t.deepEqual(action.type, "USERS_FETCH_ERROR");
   t.deepEqual(action.error, error, "has the error");
   t.deepEqual(action.data, data, "has the data");
+});
+
+test(subject + "createRequest", function(t) {
+  const user = makeUser();
+  const data = {foo: 1};
+
+  const action = actionCreators.createRequest(user, data);
+
+  t.deepEqual(action.type, "USERS_CREATE_REQUEST");
+  t.deepEqual(action.record, user, "has the user");
+  t.deepEqual(action.data, data, "has the data");
+
+  function withoutPayload() {
+    actionCreators.createRequest();
+  }
+  t.throws(withoutPayload, /Expected record/);
+
+  // it expects single record
+  function withArray() {
+    actionCreators.createRequest([]);
+  }
+  t.throws(withArray, arrayRegEx);
+
+  // it expects a key on the record
+  function withoutKey() {
+    const userWithoutKey = {};
+    actionCreators.createRequest(userWithoutKey);
+  }
+  t.throws(withoutKey, /Expected record\.id in createRequest/);
 });
 
 test(subject + "createStart", function(t) {
@@ -150,6 +192,28 @@ test(subject + "createError", function(t) {
   t.throws(withoutKey, /Expected record\.id in createError/);
 });
 
+test(subject + "updateRequest", function(t) {
+  const user = makeUser();
+  const data = {foo: 1};
+
+  const action = actionCreators.updateRequest(user, data);
+
+  t.deepEqual(action.type, "USERS_UPDATE_REQUEST");
+  t.deepEqual(action.record, user, "has the user");
+  t.deepEqual(action.data, data, "has the data");
+
+  function withoutPayload() {
+    actionCreators.updateRequest();
+  }
+  t.throws(withoutPayload, /Expected record/);
+
+  // it expects one
+  function withArray() {
+    actionCreators.updateRequest([]);
+  }
+  t.throws(withArray, arrayRegEx);
+});
+
 test(subject + "updateStart", function(t) {
   const user = makeUser();
   const data = {foo: 1};
@@ -213,6 +277,28 @@ test(subject + "updateError", function(t) {
   // it expects one
   function withArray() {
     actionCreators.updateError(error, []);
+  }
+  t.throws(withArray, arrayRegEx);
+});
+
+test(subject + "deleteRequest", function(t) {
+  const user = makeUser();
+  const data = {foo: 1};
+
+  const action = actionCreators.deleteRequest(user, data);
+
+  t.deepEqual(action.type, "USERS_DELETE_REQUEST");
+  t.deepEqual(action.record, user, "has the user");
+  t.deepEqual(action.data, data, "has the data");
+
+  function withoutPayload() {
+    actionCreators.deleteRequest();
+  }
+  t.throws(withoutPayload, /Expected record/);
+
+  // it expects one
+  function withArray() {
+    actionCreators.deleteRequest([]);
   }
   t.throws(withArray, arrayRegEx);
 });

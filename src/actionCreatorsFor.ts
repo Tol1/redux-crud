@@ -38,6 +38,13 @@ function actionCreatorsFor<T>(resourceName: string, config?: IConfig) {
   }
 
   return {
+    fetchRequest(data?) {
+      return {
+        data,
+        type: actionTypes.fetchRequest
+      };
+    },
+
     fetchStart(data?) {
       return {
         data,
@@ -64,6 +71,16 @@ function actionCreatorsFor<T>(resourceName: string, config?: IConfig) {
         data,
         error,
         type: actionTypes.fetchError
+      };
+    },
+
+    createRequest(record?: T, data?) {
+      const name: ReducerName = "createRequest";
+      assertOneRecord(name, record);
+      return {
+        data,
+        record,
+        type: actionTypes.createRequest
       };
     },
 
@@ -103,6 +120,17 @@ function actionCreatorsFor<T>(resourceName: string, config?: IConfig) {
       };
     },
 
+    updateRequest(record?: T, data?) {
+      const name: ReducerName = "updateRequest";
+      assertOneRecord(name, record);
+
+      return {
+        data,
+        record,
+        type: actionTypes.updateRequest
+      };
+    },
+
     updateStart(record?: T, data?) {
       const name: ReducerName = "updateStart";
       assertOneRecord(name, record);
@@ -135,6 +163,17 @@ function actionCreatorsFor<T>(resourceName: string, config?: IConfig) {
         error,
         record,
         type: actionTypes.updateError
+      };
+    },
+
+    deleteRequest(record?: T, data?) {
+      const name: ReducerName = "deleteRequest";
+      assertOneRecord(name, record);
+
+      return {
+        data,
+        record,
+        type: actionTypes.deleteRequest
       };
     },
 
