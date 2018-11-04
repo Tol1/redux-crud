@@ -11,7 +11,6 @@
      * Any rules specified here will override those from the base config we are extending.
      */
     "curly": false,
-    "no-var-keyword": false,
     "only-arrow-functions": false,
     "ordered-imports": false,
     "trailing-comma": false,
