@@ -1,7 +1,7 @@
 import * as snakeCase from "lodash.snakecase";
-import {ILooseObject} from "./types";
+import {IConfig, ILooseObject} from "./types";
 
-function addGroup(resource, actionTypes, group, config) {
+function addGroup(resource, actionTypes, group, async, config) {
   const upperResource = snakeCase(resource).toUpperCase();
   const upperGroup = group.toUpperCase();
 
@@ -14,42 +14,46 @@ function addGroup(resource, actionTypes, group, config) {
   const successAlias = group + "Success";
   const errorAlias = group + "Error";
 
-  actionTypes[request] = request;
+  if (async) {
+    actionTypes[request] = request;
+  }
   actionTypes[start] = start;
   actionTypes[success] = success;
   actionTypes[error] = error;
 
   if (config.addAlias) {
-    actionTypes[requestAlias] = request;
+    if (async) {
+      actionTypes[requestAlias] = request;
+    }
     actionTypes[startAlias] = start;
     actionTypes[successAlias] = success;
     actionTypes[errorAlias] = error;
   }
 }
 
-const actionTypesFor = (resource, config?) => {
-  if (resource == null) {
-    throw new Error("Expected resource");
+const actionTypesFor = (resourceName, config?: IConfig) => {
+  if (resourceName == null) {
+    throw new Error("Expected resourceName");
   }
-  config = config || {};
+  config = config || {resourceName};
   if (config.addAlias == null) {
     config.addAlias = true;
   }
 
-  resource = resource.trim();
-  if (resource === "") {
-    throw new Error("Expected resource");
+  resourceName = resourceName.trim();
+  if (resourceName === "") {
+    throw new Error("Expected resourceName");
   }
   const actionTypes: ILooseObject = {};
 
-  addGroup(resource, actionTypes, "fetch", config);
-  addGroup(resource, actionTypes, "create", config);
-  addGroup(resource, actionTypes, "update", config);
-  addGroup(resource, actionTypes, "delete", config);
+  addGroup(resourceName, actionTypes, "fetch", true, config);
+  addGroup(resourceName, actionTypes, "create", true, config);
+  addGroup(resourceName, actionTypes, "update", true, config);
+  addGroup(resourceName, actionTypes, "delete", true, config);
 
   if (config.additionalTypes) {
-    config.additionalTypes.forEach(additionalType =>
-      addGroup(resource, actionTypes, additionalType, config)
+    Object.entries(config.additionalTypes).forEach(([additionalType, async]) =>
+      addGroup(resourceName, actionTypes, additionalType, async, config)
     );
   }
 

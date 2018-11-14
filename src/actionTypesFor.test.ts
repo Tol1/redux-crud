@@ -47,12 +47,27 @@ test("returns aliases", function(t) {
   t.deepEqual(actionTypes.deleteError, "USERS_DELETE_ERROR");
 });
 
-test("returns custom action types", function(t) {
+test("returns custom async action types", function(t) {
   const customActionTypes = actionTypesFor("users", {
-    additionalTypes: ["search"]
+    additionalTypes: {
+      search: true
+    }
   });
 
   t.deepEqual(customActionTypes.searchRequest, "USERS_SEARCH_REQUEST");
+  t.deepEqual(customActionTypes.searchStart, "USERS_SEARCH_START");
+  t.deepEqual(customActionTypes.searchSuccess, "USERS_SEARCH_SUCCESS");
+  t.deepEqual(customActionTypes.searchError, "USERS_SEARCH_ERROR");
+});
+
+test("returns custom sync action types", function(t) {
+  const customActionTypes = actionTypesFor("users", {
+    additionalTypes: {
+      search: false
+    }
+  });
+
+  t.is(customActionTypes.searchRequest, undefined);
   t.deepEqual(customActionTypes.searchStart, "USERS_SEARCH_START");
   t.deepEqual(customActionTypes.searchSuccess, "USERS_SEARCH_SUCCESS");
   t.deepEqual(customActionTypes.searchError, "USERS_SEARCH_ERROR");

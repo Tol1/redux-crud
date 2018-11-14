@@ -1,6 +1,12 @@
+export interface IBooleanObject {
+  [key: string]: boolean;
+}
+
 export interface IConfig {
   key?: string;
-  resourceName: string;
+  resourceName?: string;
+  addAlias?: boolean;
+  additionalTypes?: IBooleanObject;
 }
 
 export interface IInvariantsBaseArgs {
