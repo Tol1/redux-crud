@@ -20,7 +20,14 @@ function assertOneRecord(
   record?: any
 ) {
   invariant(record != null, "Expected record in " + actionCreatorName);
-  assertNotArray(config, "createStart", record);
+  assertNotArray(config, actionCreatorName, record);
+}
+
+function assertId(
+  actionCreatorName: ReducerName,
+  config: IConfig,
+  record?: any
+) {
   const key = config.key || constants.DEFAULT_KEY;
   invariant(
     record[key] != null,
@@ -48,6 +55,22 @@ export const getActionWithOneRecord = <T>(
 ) => {
   return function(record?: T, data?) {
     assertOneRecord(actionName, config, record);
+    assertId(actionName, config, record);
+    return {
+      data,
+      record,
+      type: actionType
+    };
+  };
+};
+
+export const getActionWithOneUnsavedRecord = <T>(
+  actionType: string,
+  actionName: ReducerName,
+  config: IConfig
+) => {
+  return function(record?: T, data?) {
+    assertOneRecord(actionName, config, record);
     return {
       data,
       record,
@@ -64,6 +87,7 @@ export const getActionWithOneRecordAndCustomField = <T>(
 ) => {
   return function(record?: T, customField?, data?) {
     assertOneRecord(actionName, config, record);
+    assertId(actionName, config, record);
 
     return {
       [customFieldName]: customField,
@@ -112,6 +136,7 @@ export const getErrorActionWithRecord = <T>(
   return function(error?, record?: T, data?) {
     assertError(actionName, error);
     assertOneRecord(actionName, config, record);
+    assertId(actionName, config, record);
 
     return {
       data,
@@ -142,7 +167,7 @@ export default function actionCreatorsFor<T>(
     ),
     fetchError: getErrorAction(actionTypes.fetchError, "fetchError"),
 
-    createRequest: getActionWithOneRecord(
+    createRequest: getActionWithOneUnsavedRecord(
       actionTypes.createRequest,
       "createRequest",
       config

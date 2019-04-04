@@ -8,7 +8,8 @@ const arrayRegEx = /Expected record not to be an array/;
 
 function makeUser() {
   return {
-    id: 11
+    id: 11,
+    name: "User"
   };
 }
 
@@ -83,13 +84,13 @@ test(subject + "fetchError", function(t) {
 });
 
 test(subject + "createRequest", function(t) {
-  const user = makeUser();
+  const userWithoutKey = {};
   const data = {foo: 1};
 
-  const action = actionCreators.createRequest(user, data);
+  const action = actionCreators.createRequest(userWithoutKey, data);
 
   t.deepEqual(action.type, "USERS_CREATE_REQUEST");
-  t.deepEqual(action.record, user, "has the user");
+  t.deepEqual(action.record, userWithoutKey, "has the user");
   t.deepEqual(action.data, data, "has the data");
 
   function withoutPayload() {
@@ -102,13 +103,6 @@ test(subject + "createRequest", function(t) {
     actionCreators.createRequest([]);
   }
   t.throws(withArray, arrayRegEx);
-
-  // it expects a key on the record
-  function withoutKey() {
-    const userWithoutKey = {};
-    actionCreators.createRequest(userWithoutKey);
-  }
-  t.throws(withoutKey, /Expected record\.id in createRequest/);
 });
 
 test(subject + "createStart", function(t) {
