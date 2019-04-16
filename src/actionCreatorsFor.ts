@@ -48,6 +48,16 @@ export const getAction = <T>(actionType: string) => {
   };
 };
 
+export const getActionWithRecord = <T>(actionType: string) => {
+  return function(record?: T, data?) {
+    return {
+      data,
+      record,
+      type: actionType
+    };
+  };
+};
+
 export const getActionWithOneRecord = <T>(
   actionType: string,
   actionName: ReducerName,
@@ -167,11 +177,7 @@ export default function actionCreatorsFor<T>(
     ),
     fetchError: getErrorAction(actionTypes.fetchError, "fetchError"),
 
-    createRequest: getActionWithOneUnsavedRecord(
-      actionTypes.createRequest,
-      "createRequest",
-      config
-    ),
+    createRequest: getActionWithRecord(actionTypes.createRequest),
     createStart: getActionWithOneRecord(
       actionTypes.createStart,
       "createStart",
@@ -189,11 +195,7 @@ export default function actionCreatorsFor<T>(
       config
     ),
 
-    updateRequest: getActionWithOneRecord(
-      actionTypes.updateRequest,
-      "updateRequest",
-      config
-    ),
+    updateRequest: getActionWithRecord(actionTypes.updateRequest),
     updateStart: getActionWithOneRecord(
       actionTypes.updateStart,
       "updateStart",
@@ -210,11 +212,7 @@ export default function actionCreatorsFor<T>(
       config
     ),
 
-    deleteRequest: getActionWithOneRecord(
-      actionTypes.deleteRequest,
-      "deleteRequest",
-      config
-    ),
+    deleteRequest: getActionWithRecord(actionTypes.deleteRequest),
     deleteStart: getActionWithOneRecord(
       actionTypes.deleteStart,
       "deleteStart",

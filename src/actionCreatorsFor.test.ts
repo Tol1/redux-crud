@@ -92,17 +92,6 @@ test(subject + "createRequest", function(t) {
   t.deepEqual(action.type, "USERS_CREATE_REQUEST");
   t.deepEqual(action.record, userWithoutKey, "has the user");
   t.deepEqual(action.data, data, "has the data");
-
-  function withoutPayload() {
-    actionCreators.createRequest();
-  }
-  t.throws(withoutPayload, /Expected record/);
-
-  // it expects single record
-  function withArray() {
-    actionCreators.createRequest([]);
-  }
-  t.throws(withArray, arrayRegEx);
 });
 
 test(subject + "createStart", function(t) {
@@ -195,17 +184,6 @@ test(subject + "updateRequest", function(t) {
   t.deepEqual(action.type, "USERS_UPDATE_REQUEST");
   t.deepEqual(action.record, user, "has the user");
   t.deepEqual(action.data, data, "has the data");
-
-  function withoutPayload() {
-    actionCreators.updateRequest();
-  }
-  t.throws(withoutPayload, /Expected record/);
-
-  // it expects one
-  function withArray() {
-    actionCreators.updateRequest([]);
-  }
-  t.throws(withArray, arrayRegEx);
 });
 
 test(subject + "updateStart", function(t) {
@@ -284,17 +262,6 @@ test(subject + "deleteRequest", function(t) {
   t.deepEqual(action.type, "USERS_DELETE_REQUEST");
   t.deepEqual(action.record, user, "has the user");
   t.deepEqual(action.data, data, "has the data");
-
-  function withoutPayload() {
-    actionCreators.deleteRequest();
-  }
-  t.throws(withoutPayload, /Expected record/);
-
-  // it expects one
-  function withArray() {
-    actionCreators.deleteRequest([]);
-  }
-  t.throws(withArray, arrayRegEx);
 });
 
 test(subject + "deleteStart", function(t) {
