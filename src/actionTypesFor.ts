@@ -3,7 +3,7 @@ import {IConfig, ILooseObject} from "./types";
 
 function addGroup(resource, actionTypes, group, async, config) {
   const upperResource = snakeCase(resource).toUpperCase();
-  const upperGroup = group.toUpperCase();
+  const upperGroup = snakeCase(group).toUpperCase();
 
   const request = upperResource + "_" + upperGroup + "_REQUEST";
   const start = upperResource + "_" + upperGroup + "_START";

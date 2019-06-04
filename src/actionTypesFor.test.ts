@@ -50,25 +50,34 @@ test("returns aliases", function(t) {
 test("returns custom async action types", function(t) {
   const customActionTypes = actionTypesFor("users", {
     additionalTypes: {
-      search: true
+      searchStuff: true
     }
   });
 
-  t.deepEqual(customActionTypes.searchRequest, "USERS_SEARCH_REQUEST");
-  t.deepEqual(customActionTypes.searchStart, "USERS_SEARCH_START");
-  t.deepEqual(customActionTypes.searchSuccess, "USERS_SEARCH_SUCCESS");
-  t.deepEqual(customActionTypes.searchError, "USERS_SEARCH_ERROR");
+  t.deepEqual(
+    customActionTypes.searchStuffRequest,
+    "USERS_SEARCH_STUFF_REQUEST"
+  );
+  t.deepEqual(customActionTypes.searchStuffStart, "USERS_SEARCH_STUFF_START");
+  t.deepEqual(
+    customActionTypes.searchStuffSuccess,
+    "USERS_SEARCH_STUFF_SUCCESS"
+  );
+  t.deepEqual(customActionTypes.searchStuffError, "USERS_SEARCH_STUFF_ERROR");
 });
 
 test("returns custom sync action types", function(t) {
   const customActionTypes = actionTypesFor("users", {
     additionalTypes: {
-      search: false
+      searchStuff: false
     }
   });
 
-  t.is(customActionTypes.searchRequest, undefined);
-  t.deepEqual(customActionTypes.searchStart, "USERS_SEARCH_START");
-  t.deepEqual(customActionTypes.searchSuccess, "USERS_SEARCH_SUCCESS");
-  t.deepEqual(customActionTypes.searchError, "USERS_SEARCH_ERROR");
+  t.is(customActionTypes.searchStuffRequest, undefined);
+  t.deepEqual(customActionTypes.searchStuffStart, "USERS_SEARCH_STUFF_START");
+  t.deepEqual(
+    customActionTypes.searchStuffSuccess,
+    "USERS_SEARCH_STUFF_SUCCESS"
+  );
+  t.deepEqual(customActionTypes.searchStuffError, "USERS_SEARCH_STUFF_ERROR");
 });
