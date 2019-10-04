@@ -24,7 +24,7 @@ test(subject + "calls fetchSuccess", function(t) {
     type: "USERS_FETCH_SUCCESS"
   });
 
-  td.verify(fetchSuccess(config, current, users, {}, undefined));
+  td.verify(fetchSuccess(config, current, users, {}, undefined, undefined));
   t.pass();
 });
 
@@ -40,7 +40,23 @@ test(subject + "calls fetchSuccess with replace", function(t) {
     type: "USERS_FETCH_SUCCESS"
   });
 
-  td.verify(fetchSuccess(config, current, users, {}, true));
+  td.verify(fetchSuccess(config, current, users, {}, true, undefined));
+  t.pass();
+});
+
+test(subject + "calls fetchSuccess with compare", function(t) {
+  const fetchSuccess = td.function();
+  const reducers = reducersFor("users", {}, {fetchSuccess});
+
+  const users = [user];
+
+  reducers(current, {
+    data: {compare: true},
+    records: users,
+    type: "USERS_FETCH_SUCCESS"
+  });
+
+  td.verify(fetchSuccess(config, current, users, {}, undefined, true));
   t.pass();
 });
 

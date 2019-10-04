@@ -32,7 +32,8 @@ function reducersFor(resourceName: string, args = {}, emptyState, reducers) {
           state,
           action.records,
           emptyState,
-          action.data && action.data.replace
+          action.data && action.data.replace,
+          action.data && action.data.compare
         );
 
       case actionTypes.createStart:

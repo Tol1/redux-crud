@@ -78,6 +78,20 @@ test(subject + " replaces", function(t) {
   t.is(updated[0].name, "Green");
 });
 
+test(subject + " compares", function(t) {
+  const curr = getCurrent();
+  const more = [
+    {
+      id: 2,
+      name: "Red"
+    }
+  ];
+  const updated = reducer(config, curr, more, [], undefined, true);
+
+  t.is(curr, updated);
+  t.true(curr === updated);
+});
+
 test(subject + "preserves the order", function(t) {
   const curr = [];
   const more = [

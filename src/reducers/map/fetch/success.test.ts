@@ -117,6 +117,20 @@ test(subject + " replaces", function(t) {
   t.is(updated["2"].name, "Green");
 });
 
+test(subject + " compares", function(t) {
+  const curr = getCurrent();
+  const more = [
+    {
+      id: 2,
+      name: "Red"
+    }
+  ];
+  const updated = reducer(config, curr, more, {}, undefined, true);
+
+  t.is(curr, updated);
+  t.true(curr === updated);
+});
+
 test(subject + " uses the given key", function(t) {
   const configWithKey = {
     key: "_id",

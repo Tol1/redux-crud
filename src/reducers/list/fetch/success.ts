@@ -17,7 +17,8 @@ export default function success(
   current: any[],
   records: any,
   emptyState: any,
-  replace: boolean = false
+  replace: boolean = false,
+  compare: boolean = false
 ): any[] {
   invariants(invariantArgs, config, current, records);
 
@@ -27,5 +28,11 @@ export default function success(
   // All given records must have a key
   assertAllHaveKeys(config, reducerName, records);
 
-  return store.merge(replace ? emptyState : current, records, config.key);
+  return store.merge(
+    replace ? emptyState : current,
+    records,
+    config.key,
+    false,
+    compare
+  );
 }

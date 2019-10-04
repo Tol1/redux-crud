@@ -1,6 +1,7 @@
 import * as indexBy from "ramda/src/indexBy";
 import * as prop from "ramda/src/prop";
 import * as merge from "ramda/src/merge";
+import {shallowEqual} from "fast-equals";
 
 import assertAllHaveKeys from "../../../utils/assertAllHaveKeys";
 import constants from "../../../constants";
@@ -20,7 +21,8 @@ export default function success(
   current: IMap<any>,
   records: any,
   emptyState: any,
-  replace: boolean = false
+  replace: boolean = false,
+  compare: boolean = false
 ): IMap<any> {
   invariants(invariantArgs, config, current, records);
 
@@ -30,7 +32,15 @@ export default function success(
   // All given records must have a key
   assertAllHaveKeys(config, reducerName, records);
 
-  const mergeValues = indexBy(prop(config.key), records);
+  const base = replace ? emptyState : current;
+  let changed = false;
+  const mergeValues = records.reduce((acc, record) => {
+    if (!compare || !shallowEqual(base[record[config.key]], record)) {
+      acc[record[config.key]] = record;
+      changed = true;
+    }
+    return acc;
+  }, {});
 
-  return merge(replace ? emptyState : current, mergeValues);
+  return changed ? merge(base, mergeValues) : base;
 }
