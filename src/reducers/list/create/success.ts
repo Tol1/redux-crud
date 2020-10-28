@@ -2,6 +2,7 @@ import constants from "../../../constants";
 import invariants from "../invariants";
 
 import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
+import ReduxCrudError from "../../../utils/reduxCrudError";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_SUCCESS;
 const invariantArgs: IInvariantsBaseArgs = {
@@ -23,7 +24,8 @@ export default function success(
   // Update existing records
   let updatedCollection = current.map(function(record) {
     const recordKey = record[key];
-    if (recordKey == null) throw new Error("Expected record to have " + key);
+    if (recordKey == null)
+      throw new ReduxCrudError("Expected record to have " + key, record);
     const isSameKey = recordKey === addedRecord[key];
     const isSameClientGetKey =
       clientGeneratedKey != null && clientGeneratedKey === recordKey;

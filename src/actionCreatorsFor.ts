@@ -31,7 +31,12 @@ function assertId(
   const key = config.key || constants.DEFAULT_KEY;
   invariant(
     record[key] != null,
-    "Expected record." + key + " in " + actionCreatorName
+    "Expected record." +
+      key +
+      " in " +
+      config.resourceName +
+      "/" +
+      actionCreatorName
   );
 }
 

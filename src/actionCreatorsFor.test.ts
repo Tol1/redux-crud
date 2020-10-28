@@ -120,7 +120,7 @@ test(subject + "createStart", function(t) {
     const userWithoutKey = {};
     actionCreators.createStart(userWithoutKey);
   }
-  t.throws(withoutKey, /Expected record\.id in createStart/);
+  t.throws(withoutKey, /Expected record\.id in users\/createStart/);
 });
 
 test(subject + "createSuccess", function(t) {
@@ -172,7 +172,7 @@ test(subject + "createError", function(t) {
     const userWithoutKey = {};
     actionCreators.createError(error, userWithoutKey);
   }
-  t.throws(withoutKey, /Expected record\.id in createError/);
+  t.throws(withoutKey, /Expected record\.id in users\/createError/);
 });
 
 test(subject + "updateRequest", function(t) {

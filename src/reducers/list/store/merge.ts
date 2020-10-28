@@ -1,4 +1,5 @@
 import {shallowEqual} from "fast-equals";
+import ReduxCrudError from "../../../utils/reduxCrudError";
 import wrapArray from "../../../utils/wrapArray";
 
 /*
@@ -14,7 +15,8 @@ export default function merge(current, records, key, updateOnly?, compare?) {
 
   current.forEach(function(record, index) {
     const recordKey = record[key];
-    if (recordKey == null) throw new Error("Expected record to have " + key);
+    if (recordKey == null)
+      throw new ReduxCrudError("Expected record to have " + key, record);
     recordMap[recordKey] = record;
     indexMap[recordKey] = index;
   });

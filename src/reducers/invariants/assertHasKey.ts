@@ -4,6 +4,7 @@ import constants from "../../constants";
 import wrapArray from "../../utils/wrapArray";
 
 import {IConfig, ReducerName} from "../../types";
+import ReduxCrudError from "../../utils/reduxCrudError";
 
 export default function assertHasKey(
   config: IConfig,
@@ -15,7 +16,10 @@ export default function assertHasKey(
 
   forEach(function(record) {
     if (record[key] == null) {
-      throw new Error(scope + ": Expected record to have ." + key);
+      throw new ReduxCrudError(
+        scope + ": Expected record to have ." + key,
+        record
+      );
     }
   })(records);
 }
