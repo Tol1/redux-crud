@@ -8,6 +8,9 @@ Or adds if not there
 */
 export default function merge(current, records, key, updateOnly?, compare?) {
   records = wrapArray(records);
+  if (records.length === 0) {
+    return current;
+  }
   const recordMap = {};
   const indexMap = {};
   const newRecords = current.slice(0);
