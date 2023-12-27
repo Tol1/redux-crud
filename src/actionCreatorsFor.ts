@@ -1,4 +1,3 @@
-import * as merge from "ramda/src/merge";
 import * as invariant from "invariant";
 
 import actionTypesFor from "./actionTypesFor";

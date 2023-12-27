@@ -1,4 +1,4 @@
-import * as merge from "ramda/src/merge";
+import * as mergeRight from "ramda/src/mergeRight";
 import constants from "../../../constants";
 
 export function prepareRecord(record: object) {
@@ -7,5 +7,5 @@ export function prepareRecord(record: object) {
     [constants.SPECIAL_KEYS.PENDING_CREATE]: true
   };
 
-  return merge(record, recordStatus);
+  return mergeRight(record, recordStatus);
 }

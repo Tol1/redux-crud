@@ -1,6 +1,6 @@
 import axios from "axios"
 import AxiosMock from "axios-mock-adapter"
-import r from "ramda"
+import {mergeRight as merge} from "ramda"
 import fixture from "./todos/fixture"
 
 var mock = new AxiosMock(axios, { delayResponse: 500 })
@@ -12,7 +12,7 @@ export default function init() {
 	mock.onPost("/todos").reply(function(config) {
 		nextMockId++
 		var record = JSON.parse(config.data)
-		record = r.merge(record, {
+		record = merge(record, {
 			id: nextMockId
 		})
 		return [200, record]

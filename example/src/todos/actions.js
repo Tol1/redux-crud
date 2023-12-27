@@ -1,7 +1,7 @@
 import axios from "axios"
 import bows from "bows"
 import cuid from "cuid"
-import r from "ramda"
+import {mergeRight as merge} from "ramda"
 import reduxCrud from "../../../dist/index"
 
 var baseActionCreators = reduxCrud.actionCreatorsFor("todos")
@@ -46,7 +46,7 @@ let actionCreators = {
 	create(todo) {
 		return function(dispatch) {
 			const cid = cuid()
-			todo = r.merge(todo, {id: cid})
+			todo = merge(todo, {id: cid})
 
 			const optimisticAction = baseActionCreators.createStart(todo)
 			dispatch(optimisticAction)
@@ -138,6 +138,6 @@ let actionCreators = {
 
 }
 
-actionCreators = r.merge(baseActionCreators, actionCreators)
+actionCreators = merge(baseActionCreators, actionCreators)
 
 export default actionCreators

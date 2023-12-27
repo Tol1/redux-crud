@@ -1,4 +1,4 @@
-import * as merge from "ramda/src/merge";
+import * as mergeRight from "ramda/src/mergeRight";
 
 import {IConfig, IMap} from "../../../types";
 
@@ -16,5 +16,5 @@ export default function replace(
 
   return updateOnly && !current[recordKey]
     ? current
-    : merge(current, {[recordKey]: record});
+    : mergeRight(current, {[recordKey]: record});
 }

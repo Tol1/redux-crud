@@ -2,7 +2,7 @@
 import actions from "./actions"
 import Icon from "react-fa"
 import invariant from "invariant"
-import r from "ramda"
+import {mergeRight as merge} from "ramda"
 import React from "react"
 
 var PT = React.PropTypes
@@ -13,7 +13,7 @@ class List extends React.Component {
 
 	onToggle(todo, done, event) {
 		event.preventDefault()
-		todo = r.merge(todo, {done})
+		todo = merge(todo, {done})
 		const action = actions.update(todo)
 		this.props.dispatch(action)
 	}

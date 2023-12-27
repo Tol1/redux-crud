@@ -1,5 +1,5 @@
 import * as omit from "ramda/src/omit";
-import * as merge from "ramda/src/merge";
+import * as mergeRight from "ramda/src/mergeRight";
 
 import constants from "../../../constants";
 import findByKey from "../../../utils/findByKey";
@@ -36,6 +36,6 @@ export default function error(
       deleteRecord
     );
 
-    return merge(current, {[deleteId]: deleteRecord});
+    return mergeRight(current, {[deleteId]: deleteRecord});
   }
 }

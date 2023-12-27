@@ -1,6 +1,6 @@
 import * as indexBy from "ramda/src/indexBy";
 import * as prop from "ramda/src/prop";
-import * as merge from "ramda/src/merge";
+import * as mergeRight from "ramda/src/mergeRight";
 import {shallowEqual} from "fast-equals";
 
 import assertAllHaveKeys from "../../../utils/assertAllHaveKeys";
@@ -42,5 +42,5 @@ export default function success(
     return acc;
   }, {});
 
-  return changed ? merge(base, mergeValues) : base;
+  return changed ? mergeRight(base, mergeValues) : base;
 }

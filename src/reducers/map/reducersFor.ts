@@ -1,4 +1,4 @@
-import * as merge from "ramda/src/merge";
+import * as mergeRight from "ramda/src/mergeRight";
 
 import actionTypesFor from "../../actionTypesFor";
 import constants from "../../constants";
@@ -30,6 +30,6 @@ const baseReducers = {
 };
 
 export default function reducersFor(resourceName: string, args = {}, deps?) {
-  const reducers = merge(baseReducers, deps);
+  const reducers = mergeRight(baseReducers, deps);
   return commonReducersFor(resourceName, args, {}, reducers);
 }

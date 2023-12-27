@@ -1,5 +1,5 @@
 import * as values from "ramda/src/values";
-import * as merge from "ramda/src/merge";
+import * as mergeRight from "ramda/src/mergeRight";
 import test from "ava";
 
 import constants from "../../../constants";
@@ -63,7 +63,7 @@ test(subject + " throws when config.key is wrong", function(t) {
     }
   ];
 
-  const config2 = merge(config, {
+  const config2 = mergeRight(config, {
     key: "_id"
   });
 

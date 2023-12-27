@@ -1,4 +1,4 @@
-import * as merge from "ramda/src/merge";
+import * as mergeRight from "ramda/src/mergeRight";
 
 import actionTypesFor from "../../actionTypesFor";
 import constants from "../../constants";
@@ -14,7 +14,7 @@ function reducersFor(resourceName: string, args = {}, emptyState, reducers) {
     resourceName
   };
 
-  const config = merge(defaults, args);
+  const config = mergeRight(defaults, args);
 
   return function getReducer(state, action) {
     state = state || emptyState;
