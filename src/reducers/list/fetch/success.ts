@@ -1,10 +1,10 @@
-import assertAllHaveKeys from "../../../utils/assertAllHaveKeys";
-import constants from "../../../constants";
-import store from "../store";
-import wrapArray from "../../../utils/wrapArray";
-import invariants from "../invariants";
+import assertAllHaveKeys from "../../../utils/assertAllHaveKeys.js";
+import constants from "../../../constants.js";
+import store from "../store.js";
+import wrapArray from "../../../utils/wrapArray.js";
+import invariants from "../invariants.js";
 
-import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.FETCH_SUCCESS;
 const invariantArgs: IInvariantsBaseArgs = {

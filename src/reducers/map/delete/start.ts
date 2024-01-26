@@ -1,9 +1,14 @@
-import {prepareRecord} from "../../common/delete/start";
-import invariants from "../invariants";
-import constants from "../../../constants";
-import store from "../store";
+import {prepareRecord} from "../../common/delete/start.js";
+import invariants from "../invariants.js";
+import constants from "../../../constants.js";
+import store from "../store.js";
 
-import {IConfig, IInvariantsBaseArgs, IMap, ReducerName} from "../../../types";
+import {
+  IConfig,
+  IInvariantsBaseArgs,
+  IMap,
+  ReducerName
+} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_START;
 const invariantArgs: IInvariantsBaseArgs = {

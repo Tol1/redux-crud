@@ -1,7 +1,7 @@
-import * as is from "ramda/src/is";
+import is from "ramda/es/is";
 
-import {IMap} from "../../../types";
-import ReduxCrudError from "../../../utils/reduxCrudError";
+import {IMap} from "../../../types.js";
+import ReduxCrudError from "../../../utils/reduxCrudError.js";
 
 export default function assertValidStore(
   scope: string,

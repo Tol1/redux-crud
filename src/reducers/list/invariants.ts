@@ -1,7 +1,7 @@
-import invariants from "../invariants";
-import store from "./store";
+import invariants from "../invariants.js";
+import store from "./store.js";
 
-import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../types.js";
 
 export default function invariantsList(
   invariantArgs: IInvariantsBaseArgs,

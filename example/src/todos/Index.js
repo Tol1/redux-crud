@@ -1,8 +1,8 @@
 import { connect } from "react-redux"
-import actions     from "./actions"
+import actions     from "./actions.js"
 import invariant from "invariant"
-import List        from "./List"
-import New         from "./New"
+import List        from "./List.js"
+import New         from "./New.js"
 import React       from "react"
 
 const PT           = React.PropTypes
@@ -32,8 +32,8 @@ class Index extends React.Component {
 			<section className="p1">
 				<h2>Todos</h2>
 				<New dispatch={props.dispatch} />
-				<List 
-					dispatch={props.dispatch} 
+				<List
+					dispatch={props.dispatch}
 					todos={props.todos}
 					/>
 			</section>

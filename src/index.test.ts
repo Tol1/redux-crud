@@ -1,6 +1,6 @@
 import test from "ava";
-import * as is from "ramda/src/is";
-import index from "./index";
+import is from "ramda/es/is";
+import index from "./index.js";
 
 test("it has the expected functions", function(t) {
   t.truthy(is(Function, index.actionCreatorsFor));

@@ -1,9 +1,14 @@
-import {prepareRecord} from "../../common/update/error";
-import constants from "../../../constants";
-import invariants from "../invariants";
-import store from "../store";
+import {prepareRecord} from "../../common/update/error.js";
+import constants from "../../../constants.js";
+import invariants from "../invariants.js";
+import store from "../store.js";
 
-import {IConfig, IInvariantsBaseArgs, IMap, ReducerName} from "../../../types";
+import {
+  IConfig,
+  IInvariantsBaseArgs,
+  IMap,
+  ReducerName
+} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.UPDATE_ERROR;
 const invariantArgs: IInvariantsBaseArgs = {

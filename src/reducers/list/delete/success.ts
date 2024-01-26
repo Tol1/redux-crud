@@ -1,9 +1,9 @@
-import * as reject from "ramda/src/reject";
+import reject from "ramda/es/reject";
 
-import invariants from "../invariants";
-import constants from "../../../constants";
+import invariants from "../invariants.js";
+import constants from "../../../constants.js";
 
-import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_SUCCESS;
 const invariantArgs: IInvariantsBaseArgs = {

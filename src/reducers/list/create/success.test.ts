@@ -1,5 +1,5 @@
-import constants from "../../../constants";
-import reducer from "./success";
+import constants from "../../../constants.js";
+import reducer from "./success.js";
 import test from "ava";
 
 const subject = "createSuccess: ";
@@ -30,7 +30,7 @@ test(subject + "it throws if it cannot find config.key", function(t) {
   const f = function() {
     reducer(configWithoutKey, curr, record);
   };
-  t.throws(f, /users.createSuccess: Expected config.key/);
+  t.throws(f, {message: /users.createSuccess: Expected config.key/});
 });
 
 test(subject + "doesnt mutate the original collection", function(t) {
@@ -51,7 +51,7 @@ test(subject + "throws if given an array", function(t) {
     reducer(config, curr, record);
   }
 
-  t.throws(fn, TypeError);
+  t.throws(fn, {instanceOf: TypeError});
 });
 
 test(subject + "adds the record", function(t) {
@@ -107,7 +107,7 @@ test(subject + "it throws when record doesnt have an id", function(t) {
   const f = function() {
     reducer(config, curr, record);
   };
-  t.throws(f, /users.createSuccess: Expected record to have .id/);
+  t.throws(f, {message: /users.createSuccess: Expected record to have .id/});
 });
 
 test(subject + "it uses the cid", function(t) {

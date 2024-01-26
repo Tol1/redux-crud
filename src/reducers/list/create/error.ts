@@ -1,9 +1,9 @@
-import assertNotArray from "../../../utils/assertNotArray";
-import constants from "../../../constants";
-import invariants from "../invariants";
-import remove from "../store/remove";
+import assertNotArray from "../../../utils/assertNotArray.js";
+import constants from "../../../constants.js";
+import invariants from "../invariants.js";
+import remove from "../store/remove.js";
 
-import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_ERROR;
 const invariantArgs: IInvariantsBaseArgs = {

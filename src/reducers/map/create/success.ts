@@ -1,11 +1,16 @@
-import * as dissoc from "ramda/src/dissoc";
-import * as lensProp from "ramda/src/lensProp";
-import * as set from "ramda/src/set";
+import dissoc from "ramda/es/dissoc";
+import lensProp from "ramda/es/lensProp";
+import set from "ramda/es/set";
 
-import constants from "../../../constants";
-import invariants from "../invariants";
+import constants from "../../../constants.js";
+import invariants from "../invariants.js";
 
-import {IConfig, IInvariantsBaseArgs, IMap, ReducerName} from "../../../types";
+import {
+  IConfig,
+  IInvariantsBaseArgs,
+  IMap,
+  ReducerName
+} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_SUCCESS;
 const invariantArgs: IInvariantsBaseArgs = {

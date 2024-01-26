@@ -1,4 +1,4 @@
-import {IConfig, ReducerName} from "../types";
+import {IConfig, ReducerName} from "../types.js";
 
 export default function makeScope(
   config: IConfig,

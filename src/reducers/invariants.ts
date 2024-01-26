@@ -1,15 +1,8 @@
-import assertHasKey from "./invariants/assertHasKey";
-import assertNotArray from "../utils/assertNotArray";
-import constants from "../constants";
-import makeScope from "../utils/makeScope";
-import wrapArray from "../utils/wrapArray";
+import assertHasKey from "./invariants/assertHasKey.js";
+import assertNotArray from "../utils/assertNotArray.js";
+import makeScope from "../utils/makeScope.js";
 
-import {
-  IConfig,
-  IInvariantsBaseArgs,
-  IInvariantsExtraArgs,
-  ReducerName
-} from "../types";
+import {IInvariantsBaseArgs, IInvariantsExtraArgs} from "../types.js";
 
 export default function invariants(
   baseArgs: IInvariantsBaseArgs,

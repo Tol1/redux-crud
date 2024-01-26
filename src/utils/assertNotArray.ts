@@ -1,8 +1,8 @@
-import * as is from "ramda/src/is";
+import is from "ramda/es/is";
 
-import makeScope from "../utils/makeScope";
+import makeScope from "../utils/makeScope.js";
 
-import {IConfig, ReducerName} from "../types";
+import {IConfig, ReducerName} from "../types.js";
 
 export default function(
   config: IConfig,

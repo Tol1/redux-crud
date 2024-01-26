@@ -1,10 +1,10 @@
-import {prepareRecord} from "../../common/delete/start";
-import constants from "../../../constants";
-import findByKey from "../../../utils/findByKey";
-import invariants from "../invariants";
-import store from "../store";
+import {prepareRecord} from "../../common/delete/start.js";
+import constants from "../../../constants.js";
+import findByKey from "../../../utils/findByKey.js";
+import invariants from "../invariants.js";
+import store from "../store.js";
 
-import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_START;
 const invariantArgs: IInvariantsBaseArgs = {

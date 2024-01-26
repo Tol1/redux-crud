@@ -1,4 +1,4 @@
-import * as is from "ramda/src/is";
+import is from "ramda/es/is";
 
 export default function wrapArray(recordOrRecords) {
   const isArray = is(Array, recordOrRecords);

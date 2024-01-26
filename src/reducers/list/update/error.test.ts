@@ -1,5 +1,5 @@
-import constants from "../../../constants";
-import reducer from "./error";
+import constants from "../../../constants.js";
+import reducer from "./error.js";
 import test from "ava";
 
 const config = {
@@ -39,7 +39,7 @@ test(subject + "throws if given an array", function(t) {
     reducer(config, curr, record);
   }
 
-  t.throws(fn, TypeError);
+  t.throws(fn, {instanceOf: TypeError});
 });
 
 test(subject + "doesnt add record if not there", function(t) {

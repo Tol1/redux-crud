@@ -1,7 +1,7 @@
 import test from "ava";
 
-import constants from "../../../constants";
-import reducer from "./error";
+import constants from "../../../constants.js";
+import reducer from "./error.js";
 
 const subject = constants.REDUCER_NAMES.CREATE_ERROR;
 const config = {
@@ -30,7 +30,7 @@ test(subject + "throws if given an array", function(t) {
     reducer(config, curr, created);
   }
 
-  t.throws(fn, TypeError);
+  t.throws(fn, {instanceOf: TypeError});
 });
 
 test(subject + "removes the record", function(t) {

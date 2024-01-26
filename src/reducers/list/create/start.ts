@@ -1,9 +1,9 @@
-import {prepareRecord} from "../../common/create/start";
-import constants from "../../../constants";
-import invariants from "../invariants";
-import store from "../store";
+import {prepareRecord} from "../../common/create/start.js";
+import constants from "../../../constants.js";
+import invariants from "../invariants.js";
+import store from "../store.js";
 
-import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_START;
 const invariantArgs: IInvariantsBaseArgs = {

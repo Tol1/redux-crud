@@ -1,7 +1,7 @@
 import axios from "axios"
 import AxiosMock from "axios-mock-adapter"
 import {mergeRight as merge} from "ramda"
-import fixture from "./todos/fixture"
+import fixture from "./todos/fixture.js"
 
 var mock = new AxiosMock(axios, { delayResponse: 500 })
 var nextMockId = 100

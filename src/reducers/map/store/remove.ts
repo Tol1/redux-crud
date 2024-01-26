@@ -1,6 +1,6 @@
-import * as omit from "ramda/src/omit";
+import omit from "ramda/es/omit";
 
-import {IConfig, IMap} from "../../../types";
+import {IConfig, IMap} from "../../../types.js";
 
 export default function remove(
   config: IConfig,

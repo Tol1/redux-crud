@@ -1,5 +1,5 @@
-import * as snakeCase from "lodash.snakecase";
-import {IConfig, ILooseObject} from "./types";
+import snakeCase from "lodash.snakecase";
+import {IConfig, ILooseObject} from "./types.js";
 
 function addGroup(resource, actionTypes, group, async, config) {
   const upperResource = snakeCase(resource).toUpperCase();

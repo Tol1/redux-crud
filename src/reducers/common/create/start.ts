@@ -1,5 +1,5 @@
-import * as mergeRight from "ramda/src/mergeRight";
-import constants from "../../../constants";
+import mergeRight from "ramda/es/mergeRight";
+import constants from "../../../constants.js";
 
 export function prepareRecord(record: object) {
   const recordStatus = {

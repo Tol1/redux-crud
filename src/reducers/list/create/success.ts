@@ -1,8 +1,8 @@
-import constants from "../../../constants";
-import invariants from "../invariants";
+import constants from "../../../constants.js";
+import invariants from "../invariants.js";
 
-import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types";
-import ReduxCrudError from "../../../utils/reduxCrudError";
+import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types.js";
+import ReduxCrudError from "../../../utils/reduxCrudError.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_SUCCESS;
 const invariantArgs: IInvariantsBaseArgs = {

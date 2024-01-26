@@ -1,5 +1,5 @@
-import constants from "../../../constants";
-import reducer from "./success";
+import constants from "../../../constants.js";
+import reducer from "./success.js";
 import test from "ava";
 
 const config = {

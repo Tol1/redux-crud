@@ -2,7 +2,7 @@ import axios from "axios"
 import bows from "bows"
 import cuid from "cuid"
 import {mergeRight as merge} from "ramda"
-import reduxCrud from "../../../dist/index"
+import reduxCrud from "../../../dist/index.js"
 
 var baseActionCreators = reduxCrud.actionCreatorsFor("todos")
 var log = bows("todos-actions")

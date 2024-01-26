@@ -1,8 +1,8 @@
-import * as values from "ramda/src/values";
+import values from "ramda/es/values";
 import test from "ava";
 
-import constants from "../../../constants";
-import reducer from "./start";
+import constants from "../../../constants.js";
+import reducer from "./start.js";
 
 const config = {
   key: constants.DEFAULT_KEY,
@@ -37,7 +37,7 @@ test(subject + " throws if given an array", function(t) {
     reducer(config, curr, created);
   }
 
-  t.throws(fn, TypeError);
+  t.throws(fn, {instanceOf: TypeError});
 });
 
 test(subject + " adds the new record", function(t) {
@@ -61,7 +61,7 @@ test(subject + "it throws when record doesnt have an id", function(t) {
   const f = function() {
     reducer(config, curr, record);
   };
-  t.throws(f, /users.createStart: Expected record to have .id/);
+  t.throws(f, {message: /users.createStart: Expected record to have .id/});
 });
 
 test(subject + "adds busy and pendingCreate", function(t) {

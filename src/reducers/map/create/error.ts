@@ -1,8 +1,13 @@
-import constants from "../../../constants";
-import invariants from "../invariants";
-import store from "../store";
+import constants from "../../../constants.js";
+import invariants from "../invariants.js";
+import store from "../store.js";
 
-import {IConfig, IInvariantsBaseArgs, IMap, ReducerName} from "../../../types";
+import {
+  IConfig,
+  IInvariantsBaseArgs,
+  IMap,
+  ReducerName
+} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.CREATE_ERROR;
 const invariantArgs: IInvariantsBaseArgs = {

@@ -1,4 +1,4 @@
-import reduxCrud from "../../../dist/index"
+import reduxCrud from "../../../dist/index.js"
 import bows from "bows"
 
 var baseReducers = reduxCrud.List.reducersFor("todos")

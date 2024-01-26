@@ -1,10 +1,10 @@
-import * as forEach from "ramda/src/forEach";
+import forEach from "ramda/es/forEach";
 
-import constants from "../../constants";
-import wrapArray from "../../utils/wrapArray";
+import constants from "../../constants.js";
+import wrapArray from "../../utils/wrapArray.js";
 
-import {IConfig, ReducerName} from "../../types";
-import ReduxCrudError from "../../utils/reduxCrudError";
+import {IConfig, ReducerName} from "../../types.js";
+import ReduxCrudError from "../../utils/reduxCrudError.js";
 
 export default function assertHasKey(
   config: IConfig,

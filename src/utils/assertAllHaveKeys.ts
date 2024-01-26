@@ -1,6 +1,6 @@
-import * as has from "ramda/src/has";
-import * as all from "ramda/src/all";
-import ReduxCrudError from "./reduxCrudError";
+import has from "ramda/es/has";
+import all from "ramda/es/all";
+import ReduxCrudError from "./reduxCrudError.js";
 
 export default function(config, reducerName, records) {
   // All given records must have a key

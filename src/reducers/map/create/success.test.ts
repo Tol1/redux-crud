@@ -1,9 +1,9 @@
-import * as values from "ramda/src/values";
-import * as keys from "ramda/src/keys";
+import values from "ramda/es/values";
+import keys from "ramda/es/keys";
 import test from "ava";
 
-import constants from "../../../constants";
-import reducer from "./success";
+import constants from "../../../constants.js";
+import reducer from "./success.js";
 
 const subject = constants.REDUCER_NAMES.CREATE_SUCCESS;
 const config = {
@@ -33,7 +33,7 @@ test(subject + " it throws if it cannot find config.key", function(t) {
   const f = function() {
     reducer(brokenConfig, curr, record);
   };
-  t.throws(f, /users.createSuccess: Expected config.key/);
+  t.throws(f, {message: /users.createSuccess: Expected config.key/});
 });
 
 test(subject + " doesn't mutate the original collection", function(t) {
@@ -55,7 +55,7 @@ test(subject + " throws if given an array", function(t) {
     reducer(config, curr, record);
   }
 
-  t.throws(fn, TypeError);
+  t.throws(fn, {instanceOf: TypeError});
 });
 
 test(subject + " adds the record", function(t) {
@@ -132,7 +132,7 @@ test(subject + " it throws when record doesn't have an id", function(t) {
   const f = function() {
     reducer(config, curr, record);
   };
-  t.throws(f, /users.createSuccess: Expected record to have .id/);
+  t.throws(f, {message: /users.createSuccess: Expected record to have .id/});
 });
 
 test(subject + " uses the cid to merge the record", function(t) {

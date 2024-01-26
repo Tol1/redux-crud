@@ -1,5 +1,5 @@
-import * as is from "ramda/src/is";
-import ReduxCrudError from "../../../utils/reduxCrudError";
+import is from "ramda/es/is";
+import ReduxCrudError from "../../../utils/reduxCrudError.js";
 
 export default function assert(scope: string, current: any[]): void {
   const isArray = is(Array, current);

@@ -1,11 +1,11 @@
 {
 	"compilerOptions": {
 		"lib": ["es2017"],
-		"module": "commonjs",
-		"moduleResolution": "node",
+		"module": "ES2022",
+		"moduleResolution": "Bundler",
 		"declaration": true,
 		"outDir": "./dist",
-		"target": "es5",
+		//"target": "es5",
 		"allowSyntheticDefaultImports": true
 	},
    "exclude": [

@@ -1,6 +1,6 @@
 import {shallowEqual} from "fast-equals";
-import ReduxCrudError from "../../../utils/reduxCrudError";
-import wrapArray from "../../../utils/wrapArray";
+import ReduxCrudError from "../../../utils/reduxCrudError.js";
+import wrapArray from "../../../utils/wrapArray.js";
 
 /*
 Replaces an existing record in a list

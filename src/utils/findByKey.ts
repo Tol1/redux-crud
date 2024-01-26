@@ -1,4 +1,4 @@
-import * as find from "ramda/src/find";
+import find from "ramda/es/find";
 
 export default function findByKey(collection, key, id) {
   function predicate(record) {

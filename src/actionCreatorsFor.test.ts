@@ -1,5 +1,5 @@
 import test from "ava";
-import actionCreatorsFor from "./actionCreatorsFor";
+import actionCreatorsFor from "./actionCreatorsFor.js";
 
 const error = {};
 const actionCreators = actionCreatorsFor("users");
@@ -70,7 +70,7 @@ test(subject + "fetchSuccess", function(t) {
   function withoutPayload() {
     actionCreators.fetchSuccess();
   }
-  t.throws(withoutPayload, /Expected records/);
+  t.throws(withoutPayload, {message: /Expected records/});
 });
 
 test(subject + "fetchError", function(t) {
@@ -107,20 +107,20 @@ test(subject + "createStart", function(t) {
   function withoutPayload() {
     actionCreators.createStart();
   }
-  t.throws(withoutPayload, /Expected record/);
+  t.throws(withoutPayload, {message: /Expected record/});
 
   // it expects single record
   function withArray() {
     actionCreators.createStart([]);
   }
-  t.throws(withArray, arrayRegEx);
+  t.throws(withArray, {message: arrayRegEx});
 
   // it expects a key on the record
   function withoutKey() {
     const userWithoutKey = {};
     actionCreators.createStart(userWithoutKey);
   }
-  t.throws(withoutKey, /Expected record\.id in users\/createStart/);
+  t.throws(withoutKey, {message: /Expected record\.id in users\/createStart/});
 });
 
 test(subject + "createSuccess", function(t) {
@@ -137,13 +137,13 @@ test(subject + "createSuccess", function(t) {
   function withoutPayload() {
     actionCreators.createSuccess();
   }
-  t.throws(withoutPayload, /Expected record/);
+  t.throws(withoutPayload, {message: /Expected record/});
 
   // it expects one
   function withArray() {
     actionCreators.createSuccess([]);
   }
-  t.throws(withArray, arrayRegEx);
+  t.throws(withArray, {message: arrayRegEx});
 });
 
 test(subject + "createError", function(t) {
@@ -160,19 +160,19 @@ test(subject + "createError", function(t) {
   function withoutPayload() {
     actionCreators.createError(error);
   }
-  t.throws(withoutPayload, /Expected record/);
+  t.throws(withoutPayload, {message: /Expected record/});
 
   // it expects single record
   function withArray() {
     actionCreators.createError(error, []);
   }
-  t.throws(withArray, arrayRegEx);
+  t.throws(withArray, {message: arrayRegEx});
 
   function withoutKey() {
     const userWithoutKey = {};
     actionCreators.createError(error, userWithoutKey);
   }
-  t.throws(withoutKey, /Expected record\.id in users\/createError/);
+  t.throws(withoutKey, {message: /Expected record\.id in users\/createError/});
 });
 
 test(subject + "updateRequest", function(t) {
@@ -199,13 +199,13 @@ test(subject + "updateStart", function(t) {
   function withoutPayload() {
     actionCreators.updateStart();
   }
-  t.throws(withoutPayload, /Expected record/);
+  t.throws(withoutPayload, {message: /Expected record/});
 
   // it expects one
   function withArray() {
     actionCreators.updateStart([]);
   }
-  t.throws(withArray, arrayRegEx);
+  t.throws(withArray, {message: arrayRegEx});
 });
 
 test(subject + "updateSuccess", function(t) {
@@ -221,13 +221,13 @@ test(subject + "updateSuccess", function(t) {
   function withoutPayload() {
     actionCreators.updateSuccess();
   }
-  t.throws(withoutPayload, /Expected record/);
+  t.throws(withoutPayload, {message: /Expected record/});
 
   // it expects one
   function withArray() {
     actionCreators.updateSuccess([]);
   }
-  t.throws(withArray, arrayRegEx);
+  t.throws(withArray, {message: arrayRegEx});
 });
 
 test(subject + "updateError", function(t) {
@@ -244,13 +244,13 @@ test(subject + "updateError", function(t) {
   function withoutPayload() {
     actionCreators.updateError(error);
   }
-  t.throws(withoutPayload, /Expected record/);
+  t.throws(withoutPayload, {message: /Expected record/});
 
   // it expects one
   function withArray() {
     actionCreators.updateError(error, []);
   }
-  t.throws(withArray, arrayRegEx);
+  t.throws(withArray, {message: arrayRegEx});
 });
 
 test(subject + "deleteRequest", function(t) {
@@ -277,13 +277,13 @@ test(subject + "deleteStart", function(t) {
   function withoutPayload() {
     actionCreators.deleteStart();
   }
-  t.throws(withoutPayload, /Expected record/);
+  t.throws(withoutPayload, {message: /Expected record/});
 
   // it expects one
   function withArray() {
     actionCreators.deleteStart([]);
   }
-  t.throws(withArray, arrayRegEx);
+  t.throws(withArray, {message: arrayRegEx});
 });
 
 test(subject + "deleteSuccess", function(t) {
@@ -299,13 +299,13 @@ test(subject + "deleteSuccess", function(t) {
   function withoutPayload() {
     actionCreators.deleteSuccess();
   }
-  t.throws(withoutPayload, /Expected record/);
+  t.throws(withoutPayload, {message: /Expected record/});
 
   // it expects one
   function withArray() {
     actionCreators.deleteSuccess([]);
   }
-  t.throws(withArray, arrayRegEx);
+  t.throws(withArray, {message: arrayRegEx});
 });
 
 test(subject + "deleteError", function(t) {
@@ -322,11 +322,11 @@ test(subject + "deleteError", function(t) {
   function withoutPayload() {
     actionCreators.deleteError(error);
   }
-  t.throws(withoutPayload, /Expected record/);
+  t.throws(withoutPayload, {message: /Expected record/});
 
   // it expects one
   function withArray() {
     actionCreators.deleteError(error, []);
   }
-  t.throws(withArray, arrayRegEx);
+  t.throws(withArray, {message: arrayRegEx});
 });

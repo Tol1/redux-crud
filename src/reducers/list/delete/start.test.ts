@@ -1,5 +1,5 @@
-import constants from "../../../constants";
-import reducer from "./start";
+import constants from "../../../constants.js";
+import reducer from "./start.js";
 import test from "ava";
 
 const config = {
@@ -35,7 +35,7 @@ test(subject + "throws if given an array", function(t) {
     reducer(config, curr, record);
   }
 
-  t.throws(fn, TypeError);
+  t.throws(fn, {instanceOf: TypeError});
 });
 
 test(subject + "marks record as deleted and busy", function(t) {

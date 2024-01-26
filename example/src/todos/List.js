@@ -1,5 +1,5 @@
 // import bows from "bows"
-import actions from "./actions"
+import actions from "./actions.js"
 import Icon from "react-fa"
 import invariant from "invariant"
 import {mergeRight as merge} from "ramda"

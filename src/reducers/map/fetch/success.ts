@@ -1,14 +1,19 @@
-import * as indexBy from "ramda/src/indexBy";
-import * as prop from "ramda/src/prop";
-import * as mergeRight from "ramda/src/mergeRight";
+import indexBy from "ramda/es/indexBy";
+import prop from "ramda/es/prop";
+import mergeRight from "ramda/es/mergeRight";
 import {shallowEqual} from "fast-equals";
 
-import assertAllHaveKeys from "../../../utils/assertAllHaveKeys";
-import constants from "../../../constants";
-import invariants from "../invariants";
-import wrapArray from "../../../utils/wrapArray";
+import assertAllHaveKeys from "../../../utils/assertAllHaveKeys.js";
+import constants from "../../../constants.js";
+import invariants from "../invariants.js";
+import wrapArray from "../../../utils/wrapArray.js";
 
-import {IConfig, IInvariantsBaseArgs, IMap, ReducerName} from "../../../types";
+import {
+  IConfig,
+  IInvariantsBaseArgs,
+  IMap,
+  ReducerName
+} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.FETCH_SUCCESS;
 const invariantArgs: IInvariantsBaseArgs = {

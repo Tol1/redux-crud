@@ -1,4 +1,4 @@
-import reducersFor from "./map/reducersFor";
+import reducersFor from "./map/reducersFor.js";
 
 export default {
   reducersFor

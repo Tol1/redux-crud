@@ -1,6 +1,6 @@
-import * as mergeRight from "ramda/src/mergeRight";
+import mergeRight from "ramda/es/mergeRight";
 
-import {IConfig, IMap} from "../../../types";
+import {IConfig, IMap} from "../../../types.js";
 
 /*
 Adds or replace one record

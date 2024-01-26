@@ -1,8 +1,8 @@
 import test from "ava";
 import * as td from "testdouble";
 
-import constants from "../../constants";
-import reducersFor from "./reducersFor";
+import constants from "../../constants.js";
+import reducersFor from "./reducersFor.js";
 
 const current = [{}];
 const user = {};

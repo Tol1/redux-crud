@@ -1,8 +1,8 @@
-import * as values from "ramda/src/values";
+import values from "ramda/es/values";
 import test from "ava";
 
-import constants from "../../../constants";
-import reducer from "./error";
+import constants from "../../../constants.js";
+import reducer from "./error.js";
 
 const config = {
   key: constants.DEFAULT_KEY,
@@ -34,7 +34,7 @@ test(subject + "throws if given an array", function(t) {
     reducer(config, curr, record);
   }
 
-  t.throws(fn, TypeError);
+  t.throws(fn, {instanceOf: TypeError});
 });
 
 test(subject + "doesnt mutate", function(t) {

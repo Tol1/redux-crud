@@ -22,7 +22,7 @@ export interface IInvariantsExtraArgs {
 }
 
 export interface IMap<T> {
-  [key: string]: T;
+  [key: string | number]: T;
 }
 
 export type ReducerName =

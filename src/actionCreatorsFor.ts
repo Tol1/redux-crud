@@ -1,11 +1,11 @@
-import * as invariant from "invariant";
+import invariant from "invariant";
 
-import actionTypesFor from "./actionTypesFor";
-import assertNotArray from "./utils/assertNotArray";
-import constants from "./constants";
-import getDefaultConfig from "./getDefaultConfig";
+import actionTypesFor from "./actionTypesFor.js";
+import assertNotArray from "./utils/assertNotArray.js";
+import constants from "./constants.js";
+import getDefaultConfig from "./getDefaultConfig.js";
 
-import {IConfig, ReducerName} from "./types";
+import {IConfig, ReducerName} from "./types.js";
 
 // const invariant = require("invariant")
 

@@ -1,6 +1,6 @@
-import * as reject from "ramda/src/reject";
+import reject from "ramda/es/reject";
 
-import {IConfig} from "../../../types";
+import {IConfig} from "../../../types.js";
 
 export default function remove(
   config: IConfig,

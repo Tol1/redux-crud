@@ -1,9 +1,10 @@
-import * as values from "ramda/src/values";
-import * as mergeRight from "ramda/src/mergeRight";
+import values from "ramda/es/values";
+import mergeRight from "ramda/es/mergeRight";
 import test from "ava";
 
-import constants from "../../../constants";
-import reducer from "./success";
+import constants from "../../../constants.js";
+import reducer from "./success.js";
+import {IMap} from "../../../types.js";
 
 const config = {
   key: constants.DEFAULT_KEY,
@@ -12,7 +13,7 @@ const config = {
 
 const subject = constants.REDUCER_NAMES.FETCH_SUCCESS;
 
-function getCurrent() {
+function getCurrent(): IMap<any> {
   return {
     1: {
       id: 1,

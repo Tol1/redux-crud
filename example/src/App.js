@@ -2,7 +2,7 @@
 import { Provider } from 'react-redux'
 import * as redux from "redux"
 import bows from "bows"
-import initMocks from "./mocks"
+import initMocks from "./mocks.js"
 import React from "react"
 import thunkMiddleware from 'redux-thunk'
 

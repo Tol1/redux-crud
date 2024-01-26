@@ -1,7 +1,7 @@
-import {IConfig, IMap} from "../../types";
-import assert from "./store/assert";
-import merge from "./store/merge";
-import remove from "./store/remove";
+import {IConfig, IMap} from "../../types.js";
+import assert from "./store/assert.js";
+import merge from "./store/merge.js";
+import remove from "./store/remove.js";
 
 export default {
   assert,

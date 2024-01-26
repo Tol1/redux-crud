@@ -1,4 +1,4 @@
-import actionTypesFor from "./actionTypesFor";
+import actionTypesFor from "./actionTypesFor.js";
 import test from "ava";
 
 const actionTypes = actionTypesFor("users");

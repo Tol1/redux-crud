@@ -1,4 +1,4 @@
-import reducersFor from "./list/reducersFor";
+import reducersFor from "./list/reducersFor.js";
 
 export default {
   reducersFor

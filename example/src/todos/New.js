@@ -1,6 +1,6 @@
-import actions        from "./actions"
+import actions        from "./actions.js"
 // import bows           from "bows"
-import Form           from "./Form"
+import Form           from "./Form.js"
 import invariant      from "invariant"
 import React          from "react"
 

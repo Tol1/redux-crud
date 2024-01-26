@@ -1,12 +1,17 @@
-import * as omit from "ramda/src/omit";
-import * as mergeRight from "ramda/src/mergeRight";
+import omit from "ramda/es/omit";
+import mergeRight from "ramda/es/mergeRight";
 
-import constants from "../../../constants";
-import findByKey from "../../../utils/findByKey";
-import invariants from "../invariants";
-import store from "../store";
+import constants from "../../../constants.js";
+import findByKey from "../../../utils/findByKey.js";
+import invariants from "../invariants.js";
+import store from "../store.js";
 
-import {IConfig, IInvariantsBaseArgs, IMap, ReducerName} from "../../../types";
+import {
+  IConfig,
+  IInvariantsBaseArgs,
+  IMap,
+  ReducerName
+} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.DELETE_ERROR;
 const invariantArgs: IInvariantsBaseArgs = {
