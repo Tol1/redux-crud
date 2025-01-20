@@ -1,7 +1,13 @@
 import snakeCase from "lodash.snakecase";
 import {IConfig, ILooseObject} from "./types.js";
 
-function addGroup(resource, actionTypes, group, async, config) {
+function addGroup(
+  resource,
+  actionTypes: ILooseObject,
+  group,
+  async,
+  config?: IConfig
+) {
   const upperResource = snakeCase(resource).toUpperCase();
   const upperGroup = snakeCase(group).toUpperCase();
 
@@ -31,7 +37,7 @@ function addGroup(resource, actionTypes, group, async, config) {
   }
 }
 
-const actionTypesFor = (resourceName, config?: IConfig) => {
+const actionTypesFor = (resourceName: string, config?: IConfig) => {
   if (resourceName == null) {
     throw new Error("Expected resourceName");
   }
@@ -49,6 +55,7 @@ const actionTypesFor = (resourceName, config?: IConfig) => {
   addGroup(resourceName, actionTypes, "fetch", true, config);
   addGroup(resourceName, actionTypes, "create", true, config);
   addGroup(resourceName, actionTypes, "update", true, config);
+  addGroup(resourceName, actionTypes, "updateMany", true, config);
   addGroup(resourceName, actionTypes, "delete", true, config);
 
   if (config.additionalTypes) {

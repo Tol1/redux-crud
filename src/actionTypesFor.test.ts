@@ -14,6 +14,17 @@ test("returns the action actionTypes", function(t) {
   t.deepEqual(actionTypes.USERS_UPDATE_SUCCESS, "USERS_UPDATE_SUCCESS");
   t.deepEqual(actionTypes.USERS_UPDATE_ERROR, "USERS_UPDATE_ERROR");
 
+  t.deepEqual(
+    actionTypes.USERS_UPDATE_MANY_REQUEST,
+    "USERS_UPDATE_MANY_REQUEST"
+  );
+  t.deepEqual(actionTypes.USERS_UPDATE_MANY_START, "USERS_UPDATE_MANY_START");
+  t.deepEqual(
+    actionTypes.USERS_UPDATE_MANY_SUCCESS,
+    "USERS_UPDATE_MANY_SUCCESS"
+  );
+  t.deepEqual(actionTypes.USERS_UPDATE_MANY_ERROR, "USERS_UPDATE_MANY_ERROR");
+
   t.deepEqual(actionTypes.USERS_CREATE_REQUEST, "USERS_CREATE_REQUEST");
   t.deepEqual(actionTypes.USERS_CREATE_START, "USERS_CREATE_START");
   t.deepEqual(actionTypes.USERS_CREATE_SUCCESS, "USERS_CREATE_SUCCESS");
@@ -35,6 +46,11 @@ test("returns aliases", function(t) {
   t.deepEqual(actionTypes.updateStart, "USERS_UPDATE_START");
   t.deepEqual(actionTypes.updateSuccess, "USERS_UPDATE_SUCCESS");
   t.deepEqual(actionTypes.updateError, "USERS_UPDATE_ERROR");
+
+  t.deepEqual(actionTypes.updateManyRequest, "USERS_UPDATE_MANY_REQUEST");
+  t.deepEqual(actionTypes.updateManyStart, "USERS_UPDATE_MANY_START");
+  t.deepEqual(actionTypes.updateManySuccess, "USERS_UPDATE_MANY_SUCCESS");
+  t.deepEqual(actionTypes.updateManyError, "USERS_UPDATE_MANY_ERROR");
 
   t.deepEqual(actionTypes.createRequest, "USERS_CREATE_REQUEST");
   t.deepEqual(actionTypes.createStart, "USERS_CREATE_START");

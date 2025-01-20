@@ -54,6 +54,15 @@ function reducersFor(resourceName: string, args = {}, emptyState, reducers) {
       case actionTypes.updateError:
         return reducers.updateError(config, state, record);
 
+      case actionTypes.updateManyStart:
+        return reducers.updateManyStart(config, state, action.records);
+
+      case actionTypes.updateManySuccess:
+        return reducers.updateManySuccess(config, state, action.records);
+
+      case actionTypes.updateManyError:
+        return reducers.updateManyError(config, state, action.records);
+
       case actionTypes.deleteStart:
         return reducers.deleteStart(config, state, record);
 

@@ -6,16 +6,16 @@ import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.UPDATE_SUCCESS;
 const invariantArgs: IInvariantsBaseArgs = {
-  canBeArray: false,
+  canBeArray: true,
   reducerName
 };
 
 export default function success(
   config: IConfig,
   current: any[],
-  record: any
+  records: any[]
 ): any[] {
-  invariants(invariantArgs, config, current, record);
+  invariants(invariantArgs, config, current, records);
 
-  return store.merge(current, record, config.key, true);
+  return store.merge(current, records, config.key, true);
 }

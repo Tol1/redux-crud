@@ -143,6 +143,52 @@ test(subject + "calls updateError", function(t) {
   t.pass();
 });
 
+test(subject + "calls updateManyStart", function(t) {
+  const updateManyStart = td.function();
+  const reducers = reducersFor("users", {}, {updateManyStart});
+
+  const users = [user];
+
+  reducers(current, {
+    records: users,
+    type: "USERS_UPDATE_MANY_START"
+  });
+
+  td.verify(updateManyStart(config, current, users));
+  t.pass();
+});
+
+test(subject + "calls updateManySuccess", function(t) {
+  const updateManySuccess = td.function();
+  const reducers = reducersFor("users", {}, {updateManySuccess});
+
+  const users = [user];
+
+  reducers(current, {
+    records: users,
+    type: "USERS_UPDATE_MANY_SUCCESS"
+  });
+
+  td.verify(updateManySuccess(config, current, users));
+  t.pass();
+});
+
+test(subject + "calls updateManyError", function(t) {
+  const updateManyError = td.function();
+  const reducers = reducersFor("users", {}, {updateManyError});
+
+  const users = [user];
+
+  reducers(current, {
+    error,
+    records: users,
+    type: "USERS_UPDATE_MANY_ERROR"
+  });
+
+  td.verify(updateManyError(config, current, users));
+  t.pass();
+});
+
 test(subject + "calls deleteStart", function(t) {
   const deleteStart = td.function();
   const reducers = reducersFor("users", {}, {deleteStart});

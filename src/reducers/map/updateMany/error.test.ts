@@ -1,0 +1,117 @@
+import values from "ramda/es/values";
+import test from "ava";
+
+import constants from "../../../constants.js";
+import reducer from "./error.js";
+
+const config = {
+  key: constants.DEFAULT_KEY,
+  resourceName: "users"
+};
+const subject = constants.REDUCER_NAMES.UPDATE_ERROR;
+
+function getCurrent() {
+  return {
+    1: {
+      id: 1,
+      name: "Blue",
+      [constants.SPECIAL_KEYS.BUSY]: true,
+      [constants.SPECIAL_KEYS.PENDING_UPDATE]: true
+    },
+    2: {
+      id: 2,
+      name: "Red",
+      [constants.SPECIAL_KEYS.BUSY]: true,
+      [constants.SPECIAL_KEYS.PENDING_UPDATE]: true
+    }
+  };
+}
+
+function getValid() {
+  return [
+    {
+      id: 2,
+      name: "Green"
+    }
+  ];
+}
+
+test(subject + "doesnt add record if not there", function(t) {
+  const curr = getCurrent();
+  const records = [
+    {
+      id: 3,
+      name: "Green"
+    }
+  ];
+  const updated = reducer(config, curr, records);
+
+  t.is(values(updated).length, 2);
+});
+
+test(subject + "removes busy", function(t) {
+  const curr = getCurrent();
+  const record = getValid();
+  const updated = reducer(config, curr, record);
+
+  t.truthy(
+    updated["1"][constants.SPECIAL_KEYS.BUSY],
+    "doesnt remove on others"
+  );
+  t.truthy(updated["2"][constants.SPECIAL_KEYS.BUSY] == null, "removes busy");
+});
+
+test(subject + "doesnt mutate the original collection", function(t) {
+  const curr = getCurrent();
+  const record = getValid();
+  const updated = reducer(config, curr, record);
+
+  t.is(curr["2"][constants.SPECIAL_KEYS.BUSY], true);
+  t.is(updated["2"][constants.SPECIAL_KEYS.BUSY], undefined);
+});
+
+test(subject + "doesnt remove pendingUpdate", function(t) {
+  const curr = getCurrent();
+  const record = getValid();
+  const updated = reducer(config, curr, record);
+
+  t.truthy(updated["2"][constants.SPECIAL_KEYS.PENDING_UPDATE]);
+});
+
+test(subject + "uses the given key", function(t) {
+  const configWithKey = {
+    key: "_id",
+    resourceName: "users"
+  };
+  const curr = {
+    2: {
+      _id: 2,
+      name: "Blue",
+      busy: true,
+      unsaved: true
+    }
+  };
+  const records = [
+    {
+      _id: 2
+    }
+  ];
+  const updated = reducer(configWithKey, curr, records);
+
+  t.truthy(updated["2"][constants.SPECIAL_KEYS.BUSY] == null, "removes busy");
+});
+
+test(subject + "it throws when record dont have an id", function(t) {
+  const curr = getCurrent();
+  const records = [
+    {
+      name: "Green"
+    }
+  ];
+
+  const f = function() {
+    reducer(config, curr, records);
+  };
+
+  t.throws(f);
+});

@@ -33,6 +33,11 @@ test(subject + "returns the actionCreators", function(t) {
   t.truthy(actionCreators.updateSuccess);
   t.truthy(actionCreators.updateError);
 
+  t.truthy(actionCreators.updateManyRequest);
+  t.truthy(actionCreators.updateManyStart);
+  t.truthy(actionCreators.updateManySuccess);
+  t.truthy(actionCreators.updateManyError);
+
   t.truthy(actionCreators.deleteRequest);
   t.truthy(actionCreators.deleteStart);
   t.truthy(actionCreators.deleteSuccess);
@@ -239,6 +244,84 @@ test(subject + "updateError", function(t) {
   t.deepEqual(action.type, "USERS_UPDATE_ERROR");
   t.deepEqual(action.error, error);
   t.deepEqual(action.record, user, "has the user");
+  t.deepEqual(action.data, data, "has the data");
+
+  function withoutPayload() {
+    actionCreators.updateError(error);
+  }
+  t.throws(withoutPayload, {message: /Expected record/});
+
+  // it expects one
+  function withArray() {
+    actionCreators.updateError(error, []);
+  }
+  t.throws(withArray, {message: arrayRegEx});
+});
+
+test(subject + "updateManyRequest", function(t) {
+  const user = makeUser();
+  const data = {foo: 1};
+
+  const action = actionCreators.updateManyRequest([user], data);
+
+  t.deepEqual(action.type, "USERS_UPDATE_MANY_REQUEST");
+  t.deepEqual(action.records, [user], "has the user");
+  t.deepEqual(action.data, data, "has the data");
+});
+
+test(subject + "updateManyStart", function(t) {
+  const user = makeUser();
+  const data = {foo: 1};
+
+  const action = actionCreators.updateManyStart([user], data);
+
+  t.deepEqual(action.type, "USERS_UPDATE_MANY_START");
+  t.deepEqual(action.records, [user], "has the user");
+  t.deepEqual(action.data, data, "has the data");
+
+  function withoutPayload() {
+    actionCreators.updateStart();
+  }
+  t.throws(withoutPayload, {message: /Expected record/});
+
+  // it expects one
+  function withArray() {
+    actionCreators.updateStart([]);
+  }
+  t.throws(withArray, {message: arrayRegEx});
+});
+
+test(subject + "updateManySuccess", function(t) {
+  const user = makeUser();
+  const data = {foo: 1};
+
+  const action = actionCreators.updateManySuccess([user], data);
+
+  t.deepEqual(action.type, "USERS_UPDATE_MANY_SUCCESS");
+  t.deepEqual(action.records, [user], "has the user");
+  t.deepEqual(action.data, data, "has the data");
+
+  function withoutPayload() {
+    actionCreators.updateSuccess();
+  }
+  t.throws(withoutPayload, {message: /Expected record/});
+
+  // it expects one
+  function withArray() {
+    actionCreators.updateSuccess([]);
+  }
+  t.throws(withArray, {message: arrayRegEx});
+});
+
+test(subject + "updateManyError", function(t) {
+  const user = makeUser();
+  const data = {foo: 1};
+
+  const action = actionCreators.updateManyError(error, [user], data);
+
+  t.deepEqual(action.type, "USERS_UPDATE_MANY_ERROR");
+  t.deepEqual(action.error, error);
+  t.deepEqual(action.records, [user], "has the user");
   t.deepEqual(action.data, data, "has the data");
 
   function withoutPayload() {

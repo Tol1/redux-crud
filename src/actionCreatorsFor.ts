@@ -39,6 +39,16 @@ function assertId(
   );
 }
 
+function assertAllId<T>(
+  actionCreatorName: ReducerName,
+  config: IConfig,
+  records?: T[]
+) {
+  records.forEach(record => {
+    assertId(actionCreatorName, config, record);
+  });
+}
+
 function assertManyRecords(actionCreatorName, records) {
   invariant(records != null, "Expected records " + actionCreatorName);
 }
@@ -161,6 +171,25 @@ export const getErrorActionWithRecord = <T>(
   };
 };
 
+export const getErrorActionWithRecords = <T>(
+  actionType: string,
+  actionName: ReducerName,
+  config: IConfig
+) => {
+  return function(error?, records?: T[], data?) {
+    assertError(actionName, error);
+    assertManyRecords(actionName, records);
+    assertAllId(actionName, config, records);
+
+    return {
+      data,
+      error,
+      records,
+      type: actionType
+    };
+  };
+};
+
 export default function actionCreatorsFor<T>(
   resourceName: string,
   config?: IConfig
@@ -168,7 +197,7 @@ export default function actionCreatorsFor<T>(
   if (resourceName == null)
     throw new Error("actionCreatorsFor: Expected resourceName");
 
-  config = config || getDefaultConfig(resourceName);
+  config = {resourceName, ...(config || getDefaultConfig(resourceName))};
 
   const actionTypes = actionTypesFor(resourceName);
 
@@ -213,6 +242,24 @@ export default function actionCreatorsFor<T>(
     updateError: getErrorActionWithRecord(
       actionTypes.updateError,
       "updateError",
+      config
+    ),
+
+    updateManyRequest: getActionWithRecords(
+      actionTypes.updateManyRequest,
+      "updateManyRequest"
+    ),
+    updateManyStart: getActionWithRecords(
+      actionTypes.updateManyStart,
+      "updateManyStart"
+    ),
+    updateManySuccess: getActionWithRecords(
+      actionTypes.updateManySuccess,
+      "updateManySuccess"
+    ),
+    updateManyError: getErrorActionWithRecords(
+      actionTypes.updateManyError,
+      "updateManyError",
       config
     ),
 

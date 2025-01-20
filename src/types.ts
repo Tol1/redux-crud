@@ -40,7 +40,11 @@ export type ReducerName =
   | "updateError"
   | "updateSuccess"
   | "updateStart"
-  | "updateRequest";
+  | "updateRequest"
+  | "updateManyError"
+  | "updateManySuccess"
+  | "updateManyStart"
+  | "updateManyRequest";
 
 export interface IStoreList {
   remove: (config: IConfig, current: any[], record: any) => any[];

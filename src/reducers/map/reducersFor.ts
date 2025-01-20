@@ -13,6 +13,9 @@ import fetchSuccess from "./fetch/success.js";
 import updateError from "./update/error.js";
 import updateStart from "./update/start.js";
 import updateSuccess from "./update/success.js";
+import updateManyError from "./updateMany/error.js";
+import updateManyStart from "./updateMany/start.js";
+import updateManySuccess from "./updateMany/success.js";
 
 import {IConfig, ReducerName} from "../../types.js";
 
@@ -26,7 +29,10 @@ const baseReducers = {
   fetchSuccess,
   updateError,
   updateStart,
-  updateSuccess
+  updateSuccess,
+  updateManyError,
+  updateManyStart,
+  updateManySuccess
 };
 
 export default function reducersFor(resourceName: string, args = {}, deps?) {

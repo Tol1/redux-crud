@@ -27,50 +27,72 @@ function getCurrent() {
 }
 
 function getValid() {
-  return {
-    id: 2,
-    name: "Green"
-  };
+  return [
+    {
+      id: 2,
+      name: "Green"
+    }
+  ];
 }
 
-test(subject + "throws if given an array", function(t) {
-  const curr = getCurrent();
-  const record = [];
-  function fn() {
-    reducer(config, curr, record);
-  }
-
-  t.throws(fn, {instanceOf: TypeError});
-});
+function getValidFullList() {
+  return [
+    ...getValid(),
+    {
+      id: 3,
+      name: "Yellow"
+    },
+    {
+      id: 1,
+      name: "Pink"
+    }
+  ];
+}
 
 test(subject + "don't add the record if not there", function(t) {
   const curr = getCurrent();
-  const record = {
-    id: 3,
-    name: "Green"
-  };
-  const updated = reducer(config, curr, record);
+  const records = [
+    {
+      id: 3,
+      name: "Green"
+    }
+  ];
+  const updated = reducer(config, curr, records);
 
   t.is(updated.length, 2);
 });
 
 test(subject + "updates existing", function(t) {
   const curr = getCurrent();
-  const record = getValid();
-  const updated = reducer(config, curr, record);
+  const records = getValid();
+  const updated = reducer(config, curr, records);
 
   t.is(updated.length, 2);
   t.is(updated[1].id, 2);
   t.is(updated[1].name, "Green");
 });
 
+test(subject + "updates many existing", function(t) {
+  const curr = getCurrent();
+  const records = getValidFullList();
+  const updated = reducer(config, curr, records);
+
+  t.is(updated.length, 2);
+  t.is(updated[1].id, 2);
+  t.is(updated[1].name, "Green");
+  t.is(updated[0].id, 1);
+  t.is(updated[0].name, "Pink");
+});
+
 test(subject + "doesnt mutate the original collection", function(t) {
   const curr = getCurrent();
-  const record = {
-    id: 2,
-    name: "Green"
-  };
-  const updated = reducer(config, curr, record);
+  const records = [
+    {
+      id: 2,
+      name: "Green"
+    }
+  ];
+  const updated = reducer(config, curr, records);
 
   t.is(curr[1].name, "Red");
   t.is(updated[1].name, "Green");
@@ -87,23 +109,27 @@ test(subject + "uses the given key", function(t) {
       name: "Blue"
     }
   ];
-  const record = {
-    _id: 2,
-    name: "Green"
-  };
-  const updated = reducer(configWithKey, curr, record);
+  const records = [
+    {
+      _id: 2,
+      name: "Green"
+    }
+  ];
+  const updated = reducer(configWithKey, curr, records);
 
   t.is(updated.length, 1);
 });
 
 test(subject + "it throws when record dont have an id", function(t) {
   const curr = getCurrent();
-  const record = {
-    name: "Green"
-  };
+  const records = [
+    {
+      name: "Green"
+    }
+  ];
 
   const f = function() {
-    reducer(config, curr, record);
+    reducer(config, curr, records);
   };
   t.throws(f);
 });

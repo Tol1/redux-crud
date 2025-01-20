@@ -5,29 +5,32 @@ import invariants from "../invariants.js";
 import store from "../store.js";
 
 import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types.js";
-import wrapArray from "../../../utils/wrapArray.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.UPDATE_ERROR;
 const invariantArgs: IInvariantsBaseArgs = {
   reducerName,
-  canBeArray: false
+  canBeArray: true
 };
 
 export default function error(
   config: IConfig,
   current: any[],
-  record: any
+  records: any[]
 ): any[] {
-  invariants(invariantArgs, config, current, record);
+  invariants(invariantArgs, config, current, records);
 
   // We don"t want to rollback
   const key = config.key;
-  const updatedId = record[key];
-  let updatedRecord = findByKey(current, key, updatedId);
+  const updatedRecords = records
+    .map(record => {
+      const updatedId = record[key];
+      const updatedRecord = findByKey(current, key, updatedId);
 
-  if (updatedRecord == null) return current;
+      if (updatedRecord == null) return null;
 
-  updatedRecord = prepareRecord(updatedRecord);
+      return prepareRecord(updatedRecord);
+    })
+    .filter(record => record != null);
 
-  return store.merge(current, updatedRecord, key);
+  return store.merge(current, updatedRecords, key);
 }
