@@ -33,7 +33,31 @@ function getValid() {
   };
 }
 
-test(subject + "throws if given an array", function(t) {
+function getValidList() {
+  return [
+    getValid(),
+    {
+      id: 3,
+      name: "Yellow"
+    }
+  ];
+}
+
+function getValidFullList() {
+  return [
+    getValid(),
+    {
+      id: 3,
+      name: "Yellow"
+    },
+    {
+      id: 1,
+      name: "Pink"
+    }
+  ];
+}
+
+/* test(subject + "throws if given an array", function(t) {
   const curr = getCurrent();
   const record = [];
   function fn() {
@@ -41,7 +65,7 @@ test(subject + "throws if given an array", function(t) {
   }
 
   t.throws(fn, {instanceOf: TypeError});
-});
+});*/
 
 test(subject + "don't add the record if not there", function(t) {
   const curr = getCurrent();
@@ -62,6 +86,28 @@ test(subject + "updates existing", function(t) {
   t.is(updated.length, 2);
   t.is(updated[1].id, 2);
   t.is(updated[1].name, "Green");
+});
+
+test(subject + "updates existing, list", function(t) {
+  const curr = getCurrent();
+  const records = getValidList();
+  const updated = reducer(config, curr, records);
+
+  t.is(updated.length, 2);
+  t.is(updated[1].id, 2);
+  t.is(updated[1].name, "Green");
+});
+
+test(subject + "updates many existing, list", function(t) {
+  const curr = getCurrent();
+  const records = getValidFullList();
+  const updated = reducer(config, curr, records);
+
+  t.is(updated.length, 2);
+  t.is(updated[1].id, 2);
+  t.is(updated[1].name, "Green");
+  t.is(updated[0].id, 1);
+  t.is(updated[0].name, "Pink");
 });
 
 test(subject + "doesnt mutate the original collection", function(t) {

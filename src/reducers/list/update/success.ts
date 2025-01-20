@@ -6,7 +6,7 @@ import {IConfig, IInvariantsBaseArgs, ReducerName} from "../../../types.js";
 
 const reducerName: ReducerName = constants.REDUCER_NAMES.UPDATE_SUCCESS;
 const invariantArgs: IInvariantsBaseArgs = {
-  canBeArray: false,
+  canBeArray: true,
   reducerName
 };
 
