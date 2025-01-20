@@ -42,4 +42,4 @@ export default {
     PENDING_CREATE: "_pendingCreate",
     PENDING_UPDATE: "_pendingUpdate"
   }
-};
+} as const;

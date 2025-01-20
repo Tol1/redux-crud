@@ -12,5 +12,9 @@
 		"dist",
 		"node_modules",
 		"example"
-	]
+	],
+  "include": [
+    "src/**/*.ts",
+    ".eslintrc.cjs"
+  ]
 }

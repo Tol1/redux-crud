@@ -21,13 +21,14 @@ const invariantArgs: IInvariantsBaseArgs = {
 export default function success(
   config: IConfig,
   current: IMap<any>,
-  addedRecord: any,
+  addedRecord: object,
   clientGeneratedKey?: string
 ): IMap<any> {
   invariants(invariantArgs, config, current, addedRecord);
 
   const key = config.key;
   const addedRecordKey: string = addedRecord[key];
+  // @ts-expect-error key is not known
   const addedRecordKeyLens = lensProp(addedRecordKey);
   const currentWithoutClientGeneratedKey = dissoc(clientGeneratedKey, current);
 

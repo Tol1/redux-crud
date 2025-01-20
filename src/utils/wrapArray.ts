@@ -1,6 +1,4 @@
-import is from "ramda/es/is";
-
-export default function wrapArray(recordOrRecords) {
-  const isArray = is(Array, recordOrRecords);
+export default function wrapArray<T>(recordOrRecords: T | T[]): T[] {
+  const isArray = Array.isArray(recordOrRecords);
   return isArray ? recordOrRecords : [recordOrRecords];
 }
