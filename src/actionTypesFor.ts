@@ -1,12 +1,14 @@
 import snakeCase from "lodash.snakecase";
 import {IConfig, ILooseObject} from "./types.js";
 
+type IConfigWithoutKey = Omit<IConfig, "key"> & Partial<Pick<IConfig, "key">>;
+
 function addGroup(
-  resource,
+  resource: string,
   actionTypes: ILooseObject,
-  group,
-  async,
-  config?: IConfig
+  group: string,
+  async: boolean,
+  config?: IConfigWithoutKey
 ) {
   const upperResource = snakeCase(resource).toUpperCase();
   const upperGroup = snakeCase(group).toUpperCase();
@@ -27,7 +29,7 @@ function addGroup(
   actionTypes[success] = success;
   actionTypes[error] = error;
 
-  if (config.addAlias) {
+  if (config?.addAlias) {
     if (async) {
       actionTypes[requestAlias] = request;
     }
@@ -37,11 +39,11 @@ function addGroup(
   }
 }
 
-const actionTypesFor = (resourceName: string, config?: IConfig) => {
+const actionTypesFor = (resourceName: string, config?: IConfigWithoutKey) => {
   if (resourceName == null) {
     throw new Error("Expected resourceName");
   }
-  config = config || {resourceName};
+  config = config || {resourceName, key: "id"};
   if (config.addAlias == null) {
     config.addAlias = true;
   }

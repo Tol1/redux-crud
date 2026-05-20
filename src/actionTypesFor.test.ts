@@ -65,6 +65,7 @@ test("returns aliases", function(t) {
 
 test("returns custom async action types", function(t) {
   const customActionTypes = actionTypesFor("users", {
+    key: "id",
     additionalTypes: {
       searchStuff: true
     }
@@ -84,12 +85,13 @@ test("returns custom async action types", function(t) {
 
 test("returns custom sync action types", function(t) {
   const customActionTypes = actionTypesFor("users", {
+    key: "id",
     additionalTypes: {
       searchStuff: false
     }
   });
 
-  t.is(customActionTypes.searchStuffRequest, undefined);
+  t.assert(customActionTypes.searchStuffRequest === undefined);
   t.deepEqual(customActionTypes.searchStuffStart, "USERS_SEARCH_STUFF_START");
   t.deepEqual(
     customActionTypes.searchStuffSuccess,

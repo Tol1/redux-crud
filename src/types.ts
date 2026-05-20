@@ -3,7 +3,7 @@ export interface IBooleanObject {
 }
 
 export interface IConfig {
-  key?: string;
+  key: string;
   resourceName?: string;
   addAlias?: boolean;
   additionalTypes?: IBooleanObject;
@@ -18,7 +18,7 @@ export interface IInvariantsExtraArgs {
   assertValidStore: (scope: string, current: any) => void;
   config: IConfig;
   current: any;
-  record: any;
+  record: ILooseObject;
 }
 
 export interface IMap<T> {

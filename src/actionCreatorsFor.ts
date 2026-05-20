@@ -16,7 +16,7 @@ function assertError(actionCreatorName: ReducerName, error) {
 function assertOneRecord(
   actionCreatorName: ReducerName,
   config: IConfig,
-  record?: any
+  record?: object | null
 ) {
   invariant(record != null, "Expected record in " + actionCreatorName);
   assertNotArray(config, actionCreatorName, record);
@@ -25,11 +25,11 @@ function assertOneRecord(
 function assertId(
   actionCreatorName: ReducerName,
   config: IConfig,
-  record?: any
+  record?: object | null
 ) {
   const key = config.key || constants.DEFAULT_KEY;
   invariant(
-    record[key] != null,
+    record?.[key] != null,
     "Expected record." +
       key +
       " in " +
@@ -39,12 +39,12 @@ function assertId(
   );
 }
 
-function assertAllId<T>(
+function assertAllId<T extends object>(
   actionCreatorName: ReducerName,
   config: IConfig,
   records?: T[]
 ) {
-  records.forEach(record => {
+  records?.forEach(record => {
     assertId(actionCreatorName, config, record);
   });
 }
@@ -53,7 +53,7 @@ function assertManyRecords(actionCreatorName, records) {
   invariant(records != null, "Expected records " + actionCreatorName);
 }
 
-export const getAction = <T>(actionType: string) => {
+export const getAction = (actionType: string) => {
   return function(data?) {
     return {
       data,
@@ -62,8 +62,8 @@ export const getAction = <T>(actionType: string) => {
   };
 };
 
-export const getActionWithRecord = <T>(actionType: string) => {
-  return function(record?: T, data?) {
+export const getActionWithRecord = <T extends object>(actionType: string) => {
+  return function(record?: T | null, data?) {
     return {
       data,
       record,
@@ -72,12 +72,12 @@ export const getActionWithRecord = <T>(actionType: string) => {
   };
 };
 
-export const getActionWithOneRecord = <T>(
+export const getActionWithOneRecord = <T extends object>(
   actionType: string,
   actionName: ReducerName,
   config: IConfig
 ) => {
-  return function(record?: T, data?) {
+  return function(record?: T | null, data?) {
     assertOneRecord(actionName, config, record);
     assertId(actionName, config, record);
     return {
@@ -88,12 +88,12 @@ export const getActionWithOneRecord = <T>(
   };
 };
 
-export const getActionWithOneUnsavedRecord = <T>(
+export const getActionWithOneUnsavedRecord = <T extends object>(
   actionType: string,
   actionName: ReducerName,
   config: IConfig
 ) => {
-  return function(record?: T, data?) {
+  return function(record?: T | null, data?) {
     assertOneRecord(actionName, config, record);
     return {
       data,
@@ -103,13 +103,13 @@ export const getActionWithOneUnsavedRecord = <T>(
   };
 };
 
-export const getActionWithOneRecordAndCustomField = <T>(
+export const getActionWithOneRecordAndCustomField = <T extends object>(
   actionType: string,
   actionName: ReducerName,
   customFieldName: string,
   config: IConfig
 ) => {
-  return function(record?: T, customField?, data?) {
+  return function(record?: T | null, customField?, data?) {
     assertOneRecord(actionName, config, record);
     assertId(actionName, config, record);
 
@@ -122,11 +122,11 @@ export const getActionWithOneRecordAndCustomField = <T>(
   };
 };
 
-export const getActionWithRecords = <T>(
+export const getActionWithRecords = <T extends object>(
   actionType: string,
   actionName: ReducerName
 ) => {
-  return function(records?: T[], data?) {
+  return function(records?: T | T[] | null, data?) {
     assertManyRecords(actionName, records);
 
     return {
@@ -137,10 +137,7 @@ export const getActionWithRecords = <T>(
   };
 };
 
-export const getErrorAction = <T>(
-  actionType: string,
-  actionName: ReducerName
-) => {
+export const getErrorAction = (actionType: string, actionName: ReducerName) => {
   return function(error?, data?) {
     assertError(actionName, error);
 
@@ -152,12 +149,12 @@ export const getErrorAction = <T>(
   };
 };
 
-export const getErrorActionWithRecord = <T>(
+export const getErrorActionWithRecord = <T extends object>(
   actionType: string,
   actionName: ReducerName,
   config: IConfig
 ) => {
-  return function(error?, record?: T, data?) {
+  return function(error?, record?: T | null, data?) {
     assertError(actionName, error);
     assertOneRecord(actionName, config, record);
     assertId(actionName, config, record);
@@ -171,7 +168,7 @@ export const getErrorActionWithRecord = <T>(
   };
 };
 
-export const getErrorActionWithRecords = <T>(
+export const getErrorActionWithRecords = <T extends object>(
   actionType: string,
   actionName: ReducerName,
   config: IConfig
@@ -190,7 +187,7 @@ export const getErrorActionWithRecords = <T>(
   };
 };
 
-export default function actionCreatorsFor<T>(
+export default function actionCreatorsFor<T extends object>(
   resourceName: string,
   config?: IConfig
 ) {
@@ -204,77 +201,77 @@ export default function actionCreatorsFor<T>(
   return {
     fetchRequest: getAction(actionTypes.fetchRequest),
     fetchStart: getAction(actionTypes.fetchStart),
-    fetchSuccess: getActionWithRecords(
+    fetchSuccess: getActionWithRecords<T>(
       actionTypes.fetchSuccess,
       "fetchSuccess"
     ),
     fetchError: getErrorAction(actionTypes.fetchError, "fetchError"),
 
-    createRequest: getActionWithRecord(actionTypes.createRequest),
-    createStart: getActionWithOneRecord(
+    createRequest: getActionWithRecord<T>(actionTypes.createRequest),
+    createStart: getActionWithOneRecord<T>(
       actionTypes.createStart,
       "createStart",
       config
     ),
-    createSuccess: getActionWithOneRecordAndCustomField(
+    createSuccess: getActionWithOneRecordAndCustomField<T>(
       actionTypes.createSuccess,
       "createSuccess",
       "cid",
       config
     ),
-    createError: getErrorActionWithRecord(
+    createError: getErrorActionWithRecord<T>(
       actionTypes.createError,
       "createError",
       config
     ),
 
-    updateRequest: getActionWithRecord(actionTypes.updateRequest),
-    updateStart: getActionWithOneRecord(
+    updateRequest: getActionWithRecord<T>(actionTypes.updateRequest),
+    updateStart: getActionWithOneRecord<T>(
       actionTypes.updateStart,
       "updateStart",
       config
     ),
-    updateSuccess: getActionWithOneRecord(
+    updateSuccess: getActionWithOneRecord<T>(
       actionTypes.updateSuccess,
       "updateSuccess",
       config
     ),
-    updateError: getErrorActionWithRecord(
+    updateError: getErrorActionWithRecord<T>(
       actionTypes.updateError,
       "updateError",
       config
     ),
 
-    updateManyRequest: getActionWithRecords(
+    updateManyRequest: getActionWithRecords<T>(
       actionTypes.updateManyRequest,
       "updateManyRequest"
     ),
-    updateManyStart: getActionWithRecords(
+    updateManyStart: getActionWithRecords<T>(
       actionTypes.updateManyStart,
       "updateManyStart"
     ),
-    updateManySuccess: getActionWithRecords(
+    updateManySuccess: getActionWithRecords<T>(
       actionTypes.updateManySuccess,
       "updateManySuccess"
     ),
-    updateManyError: getErrorActionWithRecords(
+    updateManyError: getErrorActionWithRecords<T>(
       actionTypes.updateManyError,
       "updateManyError",
       config
     ),
 
-    deleteRequest: getActionWithRecord(actionTypes.deleteRequest),
-    deleteStart: getActionWithOneRecord(
+    deleteRequest: getActionWithRecord<T>(actionTypes.deleteRequest),
+    deleteStart: getActionWithOneRecord<T>(
       actionTypes.deleteStart,
       "deleteStart",
       config
     ),
-    deleteSuccess: getActionWithOneRecord(
+    deleteSuccess: getActionWithOneRecord<T>(
       actionTypes.deleteSuccess,
       "deleteSuccess",
       config
     ),
-    deleteError: getErrorActionWithRecord(
+    deleteError: getErrorActionWithRecord<T>(
       actionTypes.deleteError,
       "deleteError",
       config

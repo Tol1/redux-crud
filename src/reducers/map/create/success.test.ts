@@ -4,6 +4,7 @@ import test from "ava";
 
 import constants from "../../../constants.js";
 import reducer from "./success.js";
+import {IConfig} from "../../../types.js";
 
 const subject = constants.REDUCER_NAMES.CREATE_SUCCESS;
 const config = {
@@ -31,7 +32,7 @@ test(subject + " it throws if it cannot find config.key", function(t) {
     resourceName: "users"
   };
   const f = function() {
-    reducer(brokenConfig, curr, record);
+    reducer(brokenConfig as IConfig, curr, record);
   };
   t.throws(f, {message: /users.createSuccess: Expected config.key/});
 });

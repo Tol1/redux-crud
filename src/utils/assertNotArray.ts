@@ -5,7 +5,7 @@ import {IConfig, ReducerName} from "../types.js";
 export default function(
   config: IConfig,
   reducerName: ReducerName,
-  record: any
+  record?: object | object[] | null
 ) {
   const scope = makeScope(config, reducerName);
   const isArray = Array.isArray(record);

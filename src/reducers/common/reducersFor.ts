@@ -3,8 +3,6 @@ import mergeRight from "ramda/es/mergeRight";
 import actionTypesFor from "../../actionTypesFor.js";
 import constants from "../../constants.js";
 
-import {IConfig, ReducerName} from "../../types.js";
-
 function reducersFor(resourceName: string, args = {}, emptyState, reducers) {
   if (resourceName == null)
     throw new Error("reducersFor: Expected resourceName");

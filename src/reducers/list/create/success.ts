@@ -10,12 +10,12 @@ const invariantArgs: IInvariantsBaseArgs = {
   canBeArray: false
 };
 
-export default function success(
+export default function success<T extends object, TAdded extends object>(
   config: IConfig,
-  current: any[],
-  addedRecord: any,
+  current: T[],
+  addedRecord: TAdded,
   clientGeneratedKey?: string
-): any[] {
+): (T | TAdded)[] {
   invariants(invariantArgs, config, current, addedRecord);
 
   const key = config.key;

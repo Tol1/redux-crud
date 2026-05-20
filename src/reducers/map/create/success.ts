@@ -18,19 +18,26 @@ const invariantArgs: IInvariantsBaseArgs = {
   canBeArray: false
 };
 
-export default function success(
+export default function success<T extends object>(
   config: IConfig,
-  current: IMap<any>,
+  current: IMap<T>,
   addedRecord: object,
   clientGeneratedKey?: string
-): IMap<any> {
+): IMap<T> {
   invariants(invariantArgs, config, current, addedRecord);
 
   const key = config.key;
   const addedRecordKey: string = addedRecord[key];
   // @ts-expect-error key is not known
   const addedRecordKeyLens = lensProp(addedRecordKey);
-  const currentWithoutClientGeneratedKey = dissoc(clientGeneratedKey, current);
+  const currentWithoutClientGeneratedKey = dissoc(
+    clientGeneratedKey as keyof typeof current,
+    current
+  );
 
-  return set(addedRecordKeyLens, addedRecord, currentWithoutClientGeneratedKey);
+  return set(
+    addedRecordKeyLens,
+    addedRecord,
+    currentWithoutClientGeneratedKey
+  ) as IMap<T>;
 }

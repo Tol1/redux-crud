@@ -1,6 +1,6 @@
-export default class ReduxCrudError extends Error {
-  public data: any;
-  constructor(message: string, data: any) {
+export default class ReduxCrudError<T> extends Error {
+  public data: T;
+  constructor(message: string, data: T) {
     super(message);
 
     this.name = "ReduxCrudError";

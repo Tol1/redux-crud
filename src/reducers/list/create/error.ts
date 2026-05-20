@@ -1,4 +1,3 @@
-import assertNotArray from "../../../utils/assertNotArray.js";
 import constants from "../../../constants.js";
 import invariants from "../invariants.js";
 import remove from "../store/remove.js";

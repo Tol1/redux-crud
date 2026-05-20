@@ -14,7 +14,7 @@ const invariantArgs: IInvariantsBaseArgs = {
 export default function start(
   config: IConfig,
   current: any[],
-  record: any
+  record: object
 ): any[] {
   invariants(invariantArgs, config, current, record);
 

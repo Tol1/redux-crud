@@ -1,4 +1,3 @@
-import {IConfig} from "./types.js";
 import actionCreatorsFor from "./actionCreatorsFor.js";
 import actionTypesFor from "./actionTypesFor.js";
 import constants from "./constants.js";

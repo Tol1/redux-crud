@@ -1,6 +1,5 @@
 import constants from "../../../constants.js";
 import invariants from "../invariants.js";
-import store from "../store.js";
 
 import {
   IConfig,
@@ -30,5 +29,4 @@ export default function success(
   }, {});
 
   return mergeRight(current, mergeValues);
-  return store.merge(config, current, records, true);
 }
